@@ -17,3 +17,13 @@ C:\Data\pers dev\IT\KKSZKI\WPF\Learning Windows Presentation Foundation (WPF)\WP
 C:\Data\pers dev\IT\KKSZKI\WPF\Learning Windows Presentation Foundation (WPF)\WPF.NET_Templates\WPF.NET_Templates\obj\Debug\WPF.NET_Templates.exe
 C:\Data\pers dev\IT\KKSZKI\WPF\Learning Windows Presentation Foundation (WPF)\WPF.NET_Templates\WPF.NET_Templates\obj\Debug\WPF.NET_Templates.pdb
 C:\Data\pers dev\IT\KKSZKI\WPF\Learning Windows Presentation Foundation (WPF)\WPF.NET_Templates\WPF.NET_Templates\obj\Debug\WPF.NET_Templates.csproj.AssemblyReference.cache
+C:\Data\pers dev\IT\KKSZKI\WPF\Learning Windows Presentation Foundation (WPF)\WPF.NET_Templates\WPF.NET_Templates\obj\Debug\Layout_GridRowDefinitions.g.cs
+C:\Data\pers dev\IT\KKSZKI\WPF\Learning Windows Presentation Foundation (WPF)\WPF.NET_Templates\WPF.NET_Templates\obj\Debug\Layout_GridRowDefinitions.baml
+C:\Data\pers dev\IT\KKSZKI\WPF\Learning Windows Presentation Foundation (WPF)\WPF.NET_Templates\WPF.NET_Templates\obj\Debug\Layout_StackPanel_DockPanel.g.cs
+C:\Data\pers dev\IT\KKSZKI\WPF\Learning Windows Presentation Foundation (WPF)\WPF.NET_Templates\WPF.NET_Templates\obj\Debug\Layout_StackPanel_DockPanel.baml
+C:\Data\pers dev\IT\KKSZKI\WPF\Learning Windows Presentation Foundation (WPF)\WPF.NET_Templates\WPF.NET_Templates\obj\Debug\Layout_RotateTransform.g.cs
+C:\Data\pers dev\IT\KKSZKI\WPF\Learning Windows Presentation Foundation (WPF)\WPF.NET_Templates\WPF.NET_Templates\obj\Debug\Layout_RotateTransform.baml
+C:\Data\pers dev\IT\KKSZKI\WPF\Learning Windows Presentation Foundation (WPF)\WPF.NET_Templates\WPF.NET_Templates\obj\Debug\Layout_ScaleTransform.g.cs
+C:\Data\pers dev\IT\KKSZKI\WPF\Learning Windows Presentation Foundation (WPF)\WPF.NET_Templates\WPF.NET_Templates\obj\Debug\Layout_ScaleTransform.baml
+C:\Data\pers dev\IT\KKSZKI\WPF\Learning Windows Presentation Foundation (WPF)\WPF.NET_Templates\WPF.NET_Templates\obj\Debug\Layout_SkewTransform.g.cs
+C:\Data\pers dev\IT\KKSZKI\WPF\Learning Windows Presentation Foundation (WPF)\WPF.NET_Templates\WPF.NET_Templates\obj\Debug\Layout_SkewTransform.baml
