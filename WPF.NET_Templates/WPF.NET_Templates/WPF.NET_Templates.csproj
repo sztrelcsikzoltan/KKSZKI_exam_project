@@ -35,6 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MahApps.Metro.IconPacks.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.Material.4.11.0\lib\net47\MahApps.Metro.IconPacks.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.Material, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.Material.4.11.0\lib\net47\MahApps.Metro.IconPacks.Material.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -58,6 +64,7 @@
     <Compile Include="Add_Element_Programmatically.xaml.cs">
       <DependentUpon>Add_Element_Programmatically.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Classes\Shared.cs" />
     <Compile Include="Layout_GridRowDefinitions.xaml.cs">
       <DependentUpon>Layout_GridRowDefinitions.xaml</DependentUpon>
     </Compile>
@@ -70,12 +77,28 @@
     <Compile Include="Layout_StackPanel_DockPanel.xaml.cs">
       <DependentUpon>Layout_StackPanel_DockPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RegisterWindow.xaml.cs">
+      <DependentUpon>RegisterWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Property_Element.xaml.cs">
       <DependentUpon>Property_Element.xaml</DependentUpon>
     </Compile>
     <Compile Include="Layout_RotateTransform.xaml.cs">
       <DependentUpon>Layout_RotateTransform.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StartWindow_with_pinPanels.xaml.cs">
+      <DependentUpon>StartWindow_with_pinPanels.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Window_FadeIn_FadeOut.xaml.cs">
+      <DependentUpon>Window_FadeIn_FadeOut.xaml</DependentUpon>
+    </Compile>
+    <Page Include="ButtonThemeModern.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Layout_GridRowDefinitions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -89,6 +112,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Layout_StackPanel_DockPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RegisterWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -116,6 +147,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="StartWindow_with_pinPanels.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Window_FadeIn_FadeOut.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -135,6 +174,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -142,6 +182,52 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\HorPin.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\VerPin.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\PinHor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\PinVer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\PinHor1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\PinVer1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\pinHor2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\pinVer2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\PinHor1col.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\PinVer1col.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\pinHor3col.png" />
+    <Resource Include="Resources\Images\pinVer3col.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\login.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\success.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\register.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\join.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

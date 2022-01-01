@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using WPF.NET_Templates.Classes;
 
 namespace WPF.NET_Templates
 {
@@ -13,5 +14,7 @@ namespace WPF.NET_Templates
     /// </summary>
     public partial class App : Application
     {
+       
     }
+    
 }
