@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/images/join.gif")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/images/success.gif")]
 
 

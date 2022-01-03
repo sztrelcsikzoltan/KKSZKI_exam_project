@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WPF.NET_Templates.Classes;
 
 namespace WPF.NET_Templates
 {
@@ -23,8 +24,6 @@ namespace WPF.NET_Templates
         ColumnDefinition colOneCopyForLayer0;
         ColumnDefinition colTwoCopyForLayer0;
         ColumnDefinition colTwoCopyForLayer1;
-
-        private LoginWindow loginWindow;
 
         public StartWindow_with_pinPanels()
         {
@@ -171,8 +170,20 @@ namespace WPF.NET_Templates
 
         private void Button_login_Click(object sender, RoutedEventArgs e)
         {
-            loginWindow = new LoginWindow();
-            loginWindow.Show();
+
+
+            // open loginwindow if it logRegWindowsClosed and user not logged in    
+            if (Shared.logRegWindowsClosed  && button_login.Content.ToString() == "LOGIN")
+            {
+                LoginWindow loginWindow = new LoginWindow();
+                loginWindow.Show();
+                Shared.logRegWindowsClosed = false;
+            }
+            else
+            {
+                button_login.Content = "LOGIN";
+                button_login.Foreground = Brushes.Red;
+            }
 
         }
 

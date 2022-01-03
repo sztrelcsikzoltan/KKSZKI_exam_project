@@ -13,6 +13,10 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WPF.NET_Templates.Classes;
+using WPF.NET_Templates.Components;
+
+
 
 namespace WPF.NET_Templates
 {
@@ -23,11 +27,10 @@ namespace WPF.NET_Templates
     public partial class LoginWindow : Window
     {
 
-        // private RegisterWindow registerWindow;
-        
-            public LoginWindow()
+        public LoginWindow()
         {
             InitializeComponent();
+            gifImage.StartAnimation();
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -37,29 +40,47 @@ namespace WPF.NET_Templates
         }
 
         
-        private void Button_Login_Click(object sender, RoutedEventArgs e)
+        private async void Button_Login_ClickAsync(object sender, RoutedEventArgs e)
         {
 
 
             // login check
             if (Textbox_UserName.Text == "admin" && PasswordBox_Password.Password == "admin")
             {
-                Image_Login.Source = new BitmapImage(new Uri("/Resources/Images/success.png", UriKind.Relative));
+                Button_Register.Click -= Button_Register_Click; // remove event handlers
+                Button_Login.Click -= Button_Login_ClickAsync;
+
+                // Image_Login.Source = new BitmapImage(new Uri("/Resources/Images/success.png", UriKind.Relative));
+                //this.WebBrowser.Source = new Uri(String.Format("file:///
+                gifImage.GifSource = "/WPF.NET_Templates;component/Resources/Images/success.gif";
+                gifImage.Width = 65;
+                gifImage.StopAnimation();
+                gifImage.StartAnimation();
+
                 TextBlock_Login.Text = $"Hello {Textbox_UserName.Text}, you are logged in.";
                 TextBlock_Login.Foreground = Brushes.LightGreen;
                 Button_Login.Foreground = Brushes.Green;
                 Button_Login.Content = "OK";
-                //MessageBox.Show("OK, you are logged in.");
-                Close();
+                Shared.startWindow_With_PinPanels.button_login.Foreground = Brushes.Green;
+                Shared.startWindow_With_PinPanels.button_login.Content = "Log out";
+
+                // how to run a method as an Action: https://stackoverflow.com/questions/13260322/how-to-use-net-action-to-execute-a-method-with-unknown-number-of-parameters
+                await Shared.Delay(() => CloseWindow(), 2500);
+
             }
             else
             {
                 TextBlock_Login.Text = "Wrong login data, please retry!";
                 TextBlock_Login.Foreground = Brushes.LightSalmon;
             }
-            
+
+        }
 
 
+        private void CloseWindow()
+        {
+            Close();
+            Shared.logRegWindowsClosed = true;
         }
 
         // Fade-in-out animation
@@ -86,8 +107,11 @@ namespace WPF.NET_Templates
         private void Button_Register_Click(object sender, RoutedEventArgs e)
         {
             Button_Register.Click -= Button_Register_Click; // remove event handler
+            Button_Login.Click -= Button_Login_ClickAsync;
+
             RegisterWindow registerWindow = new RegisterWindow();
             registerWindow.Show();
+            Shared.logRegWindowsClosed = false;
             Close();
         }
 

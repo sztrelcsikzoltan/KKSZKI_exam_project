@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPF.NET_Templates.Classes;
 
 namespace WPF.NET_Templates
 {
@@ -23,6 +24,13 @@ namespace WPF.NET_Templates
         public MainWindow()
         {
             InitializeComponent();
+            Visibility = Visibility.Collapsed;
+            Shared.startWindow_With_PinPanels = new StartWindow_with_pinPanels();
+            Shared.startWindow_With_PinPanels.Show();
+            Close();
         }
+
+
+
     }
 }

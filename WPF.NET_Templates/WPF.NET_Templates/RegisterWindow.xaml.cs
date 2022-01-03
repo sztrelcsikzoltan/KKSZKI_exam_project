@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WPF.NET_Templates.Classes;
 
 namespace WPF.NET_Templates
 {
@@ -25,6 +26,7 @@ namespace WPF.NET_Templates
         public RegisterWindow()
         {
             InitializeComponent();
+            gifImage.StartAnimation();
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -34,20 +36,28 @@ namespace WPF.NET_Templates
         }
 
         
-        private void Button_Register_Click(object sender, RoutedEventArgs e)
+        private async void Button_Register_ClickAsync(object sender, RoutedEventArgs e)
         {
-
-
             // Register check
-            if (Textbox_UserName.Text.Length >= 1 && PasswordBox_Password.Password.Length >= 4)
+            if (Textbox_UserName.Text.Length >= 4 && PasswordBox_Password.Password.Length >= 4)
             {
-                Image_Register.Source = new BitmapImage(new Uri("/Resources/Images/success.png", UriKind.Relative));
-                TextBlock_Register.Text = $"Hello {Textbox_UserName.Text}, you are registered.";
+                Button_Register.Click -= Button_Register_ClickAsync; // remove event handlers
+                Button_Login.Click -= Button_Login_Click;
+
+                // Image_Register.Source = new BitmapImage(new Uri("/Resources/Images/success.png", UriKind.Relative));
+                gifImage.GifSource = "/WPF.NET_Templates;component/Resources/Images/success.gif";
+                gifImage.Width = 65; 
+                gifImage.StopAnimation();
+                gifImage.StartAnimation();
+
+                TextBlock_Register.Text = $"Hello {Textbox_UserName.Text}, you are registered. Now you can log in.";
                 TextBlock_Register.Foreground = Brushes.LightGreen;
                 Button_Register.Foreground = Brushes.Green;
                 Button_Register.Content = "OK";
-                //MessageBox.Show("OK, you are registered.");
-                Close();
+
+                // how to run a method as an Action: https://stackoverflow.com/questions/13260322/how-to-use-net-action-to-execute-a-method-with-unknown-number-of-parameters
+                await Shared.Delay(() => StopAnimation(), 3000);
+                await Shared.Delay(() => CloseWindow(), 4500);
             }
             else
             {
@@ -55,8 +65,19 @@ namespace WPF.NET_Templates
                 TextBlock_Register.Foreground = Brushes.LightSalmon;
             }
             
+            
+        }
 
-
+        private void CloseWindow()
+        {
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.Show();
+            Close();
+            Shared.logRegWindowsClosed = true;
+        }
+        private void StopAnimation()
+        {
+            gifImage.StopAnimation();
         }
 
         // Fade-in-out animation
@@ -82,9 +103,12 @@ namespace WPF.NET_Templates
 
         private void Button_Login_Click(object sender, RoutedEventArgs e)
         {
-            Button_Login.Click -= Button_Login_Click; // remove event handler
+            Button_Login.Click -= Button_Login_Click; // remove event handlers
+            Button_Register.Click -= Button_Register_ClickAsync;
+            
             LoginWindow loginWindow = new LoginWindow();
             loginWindow.Show();
+            Shared.logRegWindowsClosed = false;
             Close();
         }
 

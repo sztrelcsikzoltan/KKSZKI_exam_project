@@ -4,16 +4,27 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF.NET_Templates"
+        xmlns:localComponents="clr-namespace:WPF.NET_Templates.Components"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
         Title="Login Window" Height="450" Width="380"
-        WindowStyle="None"
-        AllowsTransparency="True" 
+        WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Topmost="True"
         MouseDown="Window_MouseDown"
         Closing="Window_Closing"
         x:Name="window">
 
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ButtonThemeModern.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
 
     <Window.Triggers>
         <EventTrigger RoutedEvent="Window.Loaded">
@@ -32,14 +43,14 @@
                     <DoubleAnimation Name="WindowFadeOutAnimation"
                                      Storyboard.TargetName="window"
                                      Storyboard.TargetProperty="(Window.Opacity)"
-                                     From="1.0" To="0" Duration="0:0:4"
+                                     From="1.0" To="0" Duration="0:0:1"
                                      AutoReverse="False" RepeatBehavior="1x" />
                 </Storyboard>
             </BeginStoryboard>
         </EventTrigger>
     </Window.Triggers>
 
-
+    
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -59,14 +70,17 @@
 
 
             <StackPanel Grid.Row="0" VerticalAlignment="Center">
+                <!--<Image Name="Image_Login" Source="/Resources/Images/login.gif" Width="160"/>-->
+                <localComponents:GifImage x:Name="gifImage" IsAutoStart="True" GifSource="/WPF.NET_Templates;component/Resources/Images/login.gif" Width="160"/>
+                
                 <TextBlock Name="TextBlock_Login" Text="Please Log in."
+                           Margin="10"
                            TextWrapping="Wrap"
                            FontWeight="Medium"
                            FontFamily="helvetica"
                            FontSize="22"
                            Foreground="White"
                            HorizontalAlignment="Center"/>
-                <Image Name="Image_Login" Source="/Resources/Images/login.gif" Width="160"/>
             </StackPanel>
 
 
@@ -129,7 +143,8 @@
 
 
                 <StackPanel Orientation="Horizontal" Margin="0,50,0,0">
-                    <Button Name="Button_Login" Click="Button_Login_Click" Width="100" Height="40" Content="LOGIN" Margin="60,0,60,0"/>
+                    <Button Name="Button_Login" Click="Button_Login_ClickAsync"
+                            Width="100" Height="40" Margin="60,0,60,0" Content="LOGIN"/>
                     <Button Name="Button_Register" Click="Button_Register_Click"  Width="100" Height="40" Content="REGISTER"/>
                 </StackPanel>
 
