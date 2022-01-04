@@ -14,7 +14,10 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WPF.NET_Templates.Classes;
-using WPF.NET_Templates.Components;
+// using WPF.NET_Templates.Components;
+// using System.ServiceModel;
+// using System.ServiceModel.Description;
+// using WPF.NET_Templates.ServiceReference3;
 
 
 
@@ -27,6 +30,7 @@ namespace WPF.NET_Templates
     public partial class LoginWindow : Window
     {
 
+        public static ServiceReference3.UserManagementClient client;
         public LoginWindow()
         {
             InitializeComponent();
@@ -39,13 +43,59 @@ namespace WPF.NET_Templates
 
         }
 
-        
+        public static string CreateMD5(string input)
+        {
+            using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())
+            {
+                byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
+                byte[] hashBytes = md5.ComputeHash(inputBytes);
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < hashBytes.Length; i++)
+                {
+                    sb.Append(hashBytes[i].ToString("x2"));
+                }
+                return sb.ToString();
+            }
+        }
+
         private async void Button_Login_ClickAsync(object sender, RoutedEventArgs e)
         {
+            client = new ServiceReference3.UserManagementClient();
+            // string uid = null;
+            string userName = Textbox_UserName.Text;
+            string password = PasswordBox_Password.Password;
 
+            string query = $"WHERE Username='{userName}' AND Password='{CreateMD5(password)}'";
+
+            ServiceReference3.User[] user = { };
+            try
+            {
+                user = client.UserList(query);
+                
+                if (user == null)
+                {
+                MessageBox.Show("The remote database is not accessible. Please make sure you have Internet access and the application is allowed by the firewall.", caption: "Error message");
+                return;
+                }
+            }
+                catch (Exception ex)
+            {
+                if (ex.ToString().Contains("Unable to connect to the remote server"))
+                {
+                    MessageBox.Show("The remote server is not accessible. Please make sure you have Internet access and the application is allowed by the firewall.", caption: "Error message");
+                    return;
+                }
+                else
+                {
+                MessageBox.Show("Hiba történt, amelynek a részletei a következők:\n" + ex.ToString(), caption: "Error message");
+                    return;
+                }
+            }
+             
 
             // login check
-            if (Textbox_UserName.Text == "admin" && PasswordBox_Password.Password == "admin")
+            //if (Textbox_UserName.Text == "admin" && PasswordBox_Password.Password == "admin")
+            if (user.Length == 1)
             {
                 Button_Register.Click -= Button_Register_Click; // remove event handlers
                 Button_Login.Click -= Button_Login_ClickAsync;
