@@ -1,2 +1,1 @@
-# KKSZKI_exam_project
-Final examination project
+# Vizsga-Project
