@@ -907,7 +907,7 @@ namespace FrontendWPF
                 */
 
 
-                if (filterc_index < 2 == filterc_index > 0) // // update string-type fields with new value (Name)
+                if (filterc_index < 2 && filterc_index > 0) // // update string-type fields with new value (Name)
                 {
                     product_filter.GetType().GetProperty(changed_property_name).SetValue(product_filter, new_value);
                 }

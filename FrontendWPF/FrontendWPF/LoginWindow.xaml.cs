@@ -15,10 +15,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using FrontendWPF.Classes;
-// using FrontendWPF.Components;
-// using System.ServiceModel;
-// using System.ServiceModel.Description;
-// using FrontendWPF.ServiceReference3;
 
 
 namespace FrontendWPF
@@ -83,7 +79,7 @@ namespace FrontendWPF
             {
                 if (ex.ToString().Contains("no endpoint listening") || ex.ToString().Contains("EndpointNotFoundException"))
                 {
-                    MessageBox.Show("The remote host is not accessible. Please check your Internet connection, or contact the service provider.", caption: "Error message");
+                    MessageBox.Show("The remote host is not accessible. Please check your Internet connection, or contact the service provider.", caption: "Error message", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
                 else
@@ -133,7 +129,7 @@ namespace FrontendWPF
                 Shared.loggedInUser = responseLogin.User;
                 Shared.uid = responseLogin.Uid;
                 Shared.loggedIn = true;
-                Button_Close.Click -= Button_Close_Click; // remove event handlers
+                // Button_Close.Click -= Button_Close_Click; // remove event handlers
                 Button_Login.Click -= Button_Login_ClickAsync;
 
                 // Image_Login.Source = new BitmapImage(new Uri("/Resources/Images/success.png", UriKind.Relative));
@@ -158,14 +154,21 @@ namespace FrontendWPF
                     if (Shared.loggedInUser.Permission < 9)
                     {
                         Shared.StartWindow.button_ManageUsersWindow.ToolTip = "You do not have rights to manage users!";
+                        Shared.StartWindow.button_ManageLocationsWindow.ToolTip = "You do not have rights to manage locations!";
                     }
                     else
                     {
                         Shared.StartWindow.button_ManageUsersWindow.IsEnabled = true;
                         Shared.StartWindow.button_ManageUsersWindow.Foreground = Brushes.White;
+                        Shared.StartWindow.button_ManageLocationsWindow.IsEnabled = true;
+                        Shared.StartWindow.button_ManageLocationsWindow.Foreground = Brushes.White;
                     }
                     Shared.StartWindow.button_ManageProductsWindow.IsEnabled = true;
                     Shared.StartWindow.button_ManageProductsWindow.Foreground = Brushes.White;
+                    Shared.StartWindow.button_ManagePurchasesWindow.IsEnabled = true;
+                    Shared.StartWindow.button_ManagePurchasesWindow.Foreground = Brushes.White;
+                    Shared.StartWindow.button_ManageSalesWindow.IsEnabled = true;
+                    Shared.StartWindow.button_ManageSalesWindow.Foreground = Brushes.White;
                 }
                 else
                 {
@@ -212,7 +215,7 @@ namespace FrontendWPF
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
 
-            if (!closeCompleted)
+            if (!closeCompleted && (!Shared.loggedIn || !Button_Close.IsFocused)) // close window quickly if logged in and presses the Close button
             {
                 WindowFadeOut.Begin();
                 e.Cancel = true;
