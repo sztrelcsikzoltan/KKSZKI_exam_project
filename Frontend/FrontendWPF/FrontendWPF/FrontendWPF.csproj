@@ -60,6 +60,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Classes\GridViewSort.cs" />
+    <Compile Include="Classes\Region.cs" />
+    <Compile Include="Classes\Location.cs" />
     <Compile Include="Classes\SalePurchase.cs" />
     <Compile Include="Classes\Shared.cs" />
     <Compile Include="Classes\Product.cs" />
@@ -95,6 +97,9 @@
     </Compile>
     <Compile Include="GridView_Users.xaml.cs">
       <DependentUpon>GridView_Users.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ManageLocationsWindow.xaml.cs">
+      <DependentUpon>ManageLocationsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ManageSalesWindow.xaml.cs">
       <DependentUpon>ManageSalesWindow.xaml</DependentUpon>
@@ -177,6 +182,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="GridView_Users.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ManageLocationsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

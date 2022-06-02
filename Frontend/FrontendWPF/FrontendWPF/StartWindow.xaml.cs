@@ -195,6 +195,8 @@ namespace FrontendWPF
                 button_ManagePurchasesWindow.Foreground = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF989898");
                 button_ManageSalesWindow.IsEnabled = false;
                 button_ManageSalesWindow.Foreground = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF8C8C8C");
+                button_ManageLocationsWindow.IsEnabled = false;
+                button_ManageLocationsWindow.Foreground = Brushes.Gray;
 
                 ServiceReference3.UserServiceClient client = new ServiceReference3.UserServiceClient();
                 
@@ -408,6 +410,17 @@ namespace FrontendWPF
             {
                 ManageSalesWindow = new ManageSalesWindow();
                 if (ManageSalesWindow.IsEnabled) ManageSalesWindow.Show();
+            }
+        }
+
+        ManageLocationsWindow ManageLocationsWindow;
+        private void button_ManageLocationsWindow_Click(object sender, RoutedEventArgs e)
+        {
+            // show only if not open already (to avoid multiple instances)
+            if (!Application.Current.Windows.OfType<Window>().Contains(ManageLocationsWindow))
+            {
+                ManageLocationsWindow = new ManageLocationsWindow();
+                if (ManageLocationsWindow.IsEnabled) ManageLocationsWindow.Show();
             }
         }
 

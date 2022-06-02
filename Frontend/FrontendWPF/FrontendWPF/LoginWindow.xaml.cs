@@ -154,11 +154,14 @@ namespace FrontendWPF
                     if (Shared.loggedInUser.Permission < 9)
                     {
                         Shared.StartWindow.button_ManageUsersWindow.ToolTip = "You do not have rights to manage users!";
+                        Shared.StartWindow.button_ManageLocationsWindow.ToolTip = "You do not have rights to manage locations!";
                     }
                     else
                     {
                         Shared.StartWindow.button_ManageUsersWindow.IsEnabled = true;
                         Shared.StartWindow.button_ManageUsersWindow.Foreground = Brushes.White;
+                        Shared.StartWindow.button_ManageLocationsWindow.IsEnabled = true;
+                        Shared.StartWindow.button_ManageLocationsWindow.Foreground = Brushes.White;
                     }
                     Shared.StartWindow.button_ManageProductsWindow.IsEnabled = true;
                     Shared.StartWindow.button_ManageProductsWindow.Foreground = Brushes.White;

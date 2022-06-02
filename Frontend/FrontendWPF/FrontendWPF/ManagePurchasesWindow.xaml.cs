@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -15,7 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using FrontendWPF.Classes;
-
+using Microsoft.Win32;
 
 namespace FrontendWPF
 {
@@ -31,6 +32,7 @@ namespace FrontendWPF
         List<StockService.SalePurchase> filteredPurchasesList { get; set; }
         List<StockService.SalePurchase> selectedPurchasesList { get; set; }
         private List<StockService.Product> dbProductsList { get; set; }
+        private List<ServiceReference3.User> dbUsersList { get; set; }
 
         int PK_column_index = 0;
         string edit_mode;
@@ -92,7 +94,7 @@ namespace FrontendWPF
                 filterPurchasesList = new List<StockService.SalePurchase>();
 
                 Dispatcher.InvokeAsync(() => {
-                    double stretch = (600 - 58) / dataGrid1.ActualWidth; // Border width - left margin - a bit more because first column remains unchanged
+                    double stretch = (600 - 55) / dataGrid1.ActualWidth; // Border width - left margin - a bit more because first column remains unchanged
                     dataGrid1.Width = window.ActualWidth - 250 - 10; // expand dataGrid1 with to panel width (-ColumnDefinition2 width - stackPanel left margin)
                     dataGrid0.Width = dataGrid1.Width;
                     // stretch columns to dataGrid1 width
@@ -111,12 +113,12 @@ namespace FrontendWPF
             // create/reset purchase_filter item and add it to filter dataGrid0
             purchase_filter = new StockService.SalePurchase()
             {
-                Id = -1,
-                Product = "-1", // Name of product
-                Quantity = -1,
+                Id = null,
+                Product = "", // Name of product
+                Quantity = null,
                 Date = null,
-                Location = "-1",
-                Username = "-1"
+                Location = "",
+                Username = ""
             };
             filterPurchasesList.Clear();
             filterPurchasesList.Add(purchase_filter);
@@ -437,9 +439,9 @@ namespace FrontendWPF
                 }
                 else if (changed_property_name == "Product") // if wrong (product) Name value is entered
                 {
-                    if (new_value == "")
+                    if (new_value.Length < 5)
                     {
-                        stopMessage = $"Please enter a correct value for the Product name!";
+                        stopMessage = $"Product name must be at least 5 characters!";
                     }
                     else
                     {
@@ -450,6 +452,18 @@ namespace FrontendWPF
                         }
                     }
                 }
+                else if (changed_property_name == "Quantity") // if wrong Active value is entered
+                {
+                    int? int_val = Int32.TryParse(new_value, out var tempVal) ? tempVal : (int?)null;
+                    if (int_val == null || (int_val <= 0))
+                    {
+                        stopMessage = $"Please enter a correct value for the Quantity!";
+                    }
+                    else if (int_val > 1000000)
+                    {
+                        stopMessage = $"Quantity cannot exceed 1,000,000!";
+                    }
+                }
                 else if (changed_property_name == "Date") // if wrong (product) Name value is entered
                 {
                     if (DateTime.TryParse(new_value, out _) == false)
@@ -457,7 +471,22 @@ namespace FrontendWPF
                         stopMessage = $"Please enter a correct value for the date value!";
                     }
                 }
-
+                else if (changed_property_name == "Location" && Shared.locationsList.Any(p => p == new_value) == false) // if wrong Location name is entered
+                {
+                    stopMessage = $"The location '{new_value}' does not exist, please enter the correct location!";
+                }
+                else if (changed_property_name == "Username" && new_value.Length < 5)
+                {
+                    stopMessage = $"The username must be at least 5 charachters long!";
+                }
+                else if (changed_property_name == "Username" && new_value != old_value)
+                {
+                    dbUsersList = User.GetUsers("", "", "", "", "");
+                    if (dbUsersList.Any(p => p.Username == new_value) == false) // stop if user does not exist in database, AND if new username is different
+                    {
+                        stopMessage = $"The user '{new_value}' does not exist, please enter another username!";
+                    }
+                }
 
 
                 if (stopMessage != "")  // warn user, and stop
@@ -530,7 +559,7 @@ namespace FrontendWPF
                         if (edit_mode == "insert")
                         {
                             // ADD into database
-                            registerMessage = stockClient.AddSalePurchase(Shared.uid, type: "purchase", purchase_edited.Product, purchase_edited.Quantity.ToString(), purchase_edited.Location);
+                            registerMessage = stockClient.AddSalePurchase(Shared.uid, type: "purchase", purchase_edited.Product, purchase_edited.Quantity.ToString(), purchase_edited.Location, purchase_edited.Date.ToString());
                             if (registerMessage.Contains("FOREIGN KEY (`productId`)"))
                             {
                                 MessageBox.Show($"The product does not exist in the database. Please check product name.", caption: "Error message", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -547,9 +576,9 @@ namespace FrontendWPF
                         else if (edit_mode == "update")
                         {
                             updateMessage = stockClient.UpdateSalePurchase(Shared.uid, purchase_edited.Id.ToString(), type: "purchase", purchase_edited.Product, purchase_edited.Quantity.ToString(), purchase_edited.Date.ToString(), purchase_edited.Location, purchase_edited.Username);
-                            if (updateMessage != "Purchase successfully updated!")
+                            if (updateMessage != "Sale/Purchase successfully updated!")
                             {
-                                MessageBox.Show(updateMessage + " Field was not updated in the database!", caption: "Error message", MessageBoxButton.OK, MessageBoxImage.Error);
+                                MessageBox.Show(updateMessage + " Field was not updated.", caption: "Error message", MessageBoxButton.OK, MessageBoxImage.Error);
                                 // restore old value // TODO: restore cell value? 
                                 purchase_edited = purchase_edited0;
                                 return;
@@ -889,39 +918,65 @@ namespace FrontendWPF
                 changed_property_name = dataGrid1.Columns[filterc_index].Header.ToString();
                 if (changed_property_name == "Product name") { changed_property_name = "Product"; }
                 if (changed_property_name == "User name") { changed_property_name = "Username"; }
+                if (changed_property_name == "Id" && purchase_filter.Id == null) purchase_filter.Id = -999;
+                if (changed_property_name == "Quantity" && purchase_filter.Quantity == null) purchase_filter.Quantity = -999;
+                if (changed_property_name == "Date" && purchase_filter.Date == null) purchase_filter.Date = DateTime.Parse("01.01.01 01:01:01");
 
                 //get old property value of purchase by property name
                 // https://stackoverflow.com/questions/1196991/get-property-value-from-string-using-reflection
                 old_value = purchase_filter.GetType().GetProperty(changed_property_name).GetValue(purchase_filter).ToString();
+                if (changed_property_name == "Id" && purchase_filter.Id == -999) purchase_filter.Id = null;
+                if (changed_property_name == "Quantity" && purchase_filter.Quantity == -999) purchase_filter.Quantity = null;
+                if (changed_property_name == "Date" && purchase_filter.Date == DateTime.Parse("01.01.01 01:01:01")) purchase_filter.Date = null;
 
                 // check data correctness
                 string stopMessage = "";
                 if (changed_property_name == "Id")
                 {
                     int? int_val = Int32.TryParse(new_value, out var tempVal) ? tempVal : (int?)null;
-                    if (int_val == null || int_val < -1)
+                    if ((new_value != "" && int_val == null) || (int_val < 0 || int_val > 10000000))
                     {
-                        stopMessage = $"Please enter a correct value for the Id!";
+                        stopMessage = $"The Id '{new_value}' does not exist, please enter a correct value for the Id!";
                     }
                 }
-                /*
-                else if (new_value != "" && new_value != "-1" && changed_property_name == "Name" && new_value.Length < 5)
+                else if (new_value != "" && changed_property_name == "Product" && new_value.Length < 5) // if wrong (product) Name value is entered
                 {
-                    stopMessage = $"The name must be at least 5 charachters long!";
+                    stopMessage = $"Product name must be at least 5 characters long!";
                 }
-                */
-                else if (changed_property_name == "Name") // if wrong (product) Name value is entered
+                else if (new_value != "" && changed_property_name == "Quantity") // if wrong Active value is entered
                 {
-                    if (new_value == "")
+                    int? int_val = Int32.TryParse(new_value, out var tempVal) ? tempVal : (int?)null;
+                    if (int_val == null || (int_val <= 0))
                     {
-                        stopMessage = $"Please enter a correct value for the Product name!";
+                        stopMessage = $"Please enter a correct value for the Quantity!";
+                    }
+                    else if (int_val > 1000000)
+                    {
+                        stopMessage = $"Quantity cannot exceed 1,000,000!";
                     }
                 }
+                else if (new_value != "" && changed_property_name == "Date") // if wrong (product) Name value is entered
+                {
+                    old_value = old_value.Substring(0, old_value.Length - 3);
+                    if (DateTime.TryParse(new_value, out _) == false)
+                    {
+                        stopMessage = $"Please enter a correct value for the date value!";
+                    }
+                }
+                else if (new_value != "" && changed_property_name == "Location" && Shared.locationsList.Any(p => p == new_value) == false) // if wrong Location name is entered
+                {
+                    stopMessage = $"The location '{new_value}' does not exist, please enter the correct location!";
+                }
+                else if (new_value != "" && changed_property_name == "Username" && new_value.Length < 5)
+                {
+                    stopMessage = $"The username must be at least 5 charachters long!";
+                }
+
 
                 if (stopMessage != "")  // warn user, and stop
                 {
                     MessageBox.Show(stopMessage, caption: "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    textBox.Text = old_value; // restore correct cell value
+                    if (old_value != "-999" && old_value != "01.01.01 01:01:01") textBox.Text = old_value;  // restore correct cell value
                     return;
                 }
 
@@ -934,18 +989,19 @@ namespace FrontendWPF
                 */
 
 
-                if (filterc_index == 1 || filterc_index == 4 || filterc_index == 5 ) // // update string-type fields with new value ( (product) Name, Location, User (name) )
+                if (filterc_index == 1 || filterc_index == 4 || filterc_index == 5) // // update string-type fields with new value ( Product (name), Quantity, Location, Username )
                 {
                     purchase_filter.GetType().GetProperty(changed_property_name).SetValue(purchase_filter, new_value);
                 }
-                else if (filterc_index == 3) // // update Date fields with new value
+                else if (filterc_index == 3) // // update Date field with new value
                 {
-                    purchase_filter.GetType().GetProperty(changed_property_name).SetValue(purchase_filter, DateTime.Parse(new_value));
+                    DateTime? int_val = DateTime.TryParse(new_value, out var tempVal) ? tempVal : (DateTime?)null;
+                    purchase_filter.GetType().GetProperty(changed_property_name).SetValue(purchase_filter, int_val);
                 }
-                else // update int?-type fields with new value (UnitPrice)
+                else // update int?-type fields with new value (Id)
                 {
                     int? int_val = Int32.TryParse(new_value, out var tempVal) ? tempVal : (int?)null;
-                    purchase_filter.GetType().GetProperty(changed_property_name).SetValue(purchase_filter, Convert.ToInt32(new_value));
+                    purchase_filter.GetType().GetProperty(changed_property_name).SetValue(purchase_filter, int_val);
 
                 }
 
@@ -954,7 +1010,7 @@ namespace FrontendWPF
                 foreach (var purchase in dbPurchasesList)
                 {
 
-                    if ((purchase_filter.Id == -1 || purchase_filter.Id == null || purchase.Id == purchase_filter.Id) && (purchase_filter.Product == "-1" || purchase_filter.Product == "" || purchase.Quantity == purchase_filter.Quantity) && (purchase_filter.Date == null || purchase_filter.Date == null || purchase.Date == purchase_filter.Date))
+                    if ((purchase_filter.Id == null || purchase.Id == purchase_filter.Id) && (purchase_filter.Product == "" || purchase.Product == purchase_filter.Product) && (purchase_filter.Quantity == null || purchase.Quantity == purchase_filter.Quantity) && (purchase_filter.Date == null || purchase.Date == purchase_filter.Date) && (purchase_filter.Location == "" || purchase.Location == purchase_filter.Location) && (purchase_filter.Username == "" || purchase.Username == purchase_filter.Username))
                     {
                         filteredPurchasesList.Add(purchase);
                         continue;
@@ -996,6 +1052,43 @@ namespace FrontendWPF
                 Button_UpdatePurchase.IsEnabled = false;
                 Button_UpdatePurchase.Foreground = Brushes.Gray;
                 Button_UpdatePurchase.ToolTip = "You do not have rights to update data!";
+            }
+        }
+
+        private void Button_Export_Click(object sender, RoutedEventArgs e)
+        {
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Comma separated text file (*.csv)|*.csv|C# file (*.cs)|*.cs";
+            saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            saveFileDialog.FileName = "dbPurchases";
+            saveFileDialog.DefaultExt = ".csv";
+            Nullable<bool> result = saveFileDialog.ShowDialog(); // show saveFileDialog
+            if (result == true)
+            {
+                // create file content
+                StreamWriter sr = new StreamWriter(saveFileDialog.FileName, append: false, encoding: Encoding.UTF8);
+                // write file header line
+                string header_row = "Id;Product;Quantity;Date;Location;Username";
+                sr.WriteLine(header_row);
+
+                // write file rows
+                string rows = "";
+                StockService.SalePurchase purchase;
+                int i = 0;
+                for (i = 0; i < dataGrid1.Items.Count; i++)
+                {
+                    purchase = dataGrid1.Items[i] as StockService.SalePurchase;
+                    rows += $"{purchase.Id};{purchase.Product};{purchase.Quantity};{purchase.Date.ToString().Substring(0, purchase.Date.ToString().Length -3)};{purchase.Location};{purchase.Username}\n";
+                }
+                sr.Write(rows);
+                sr.Close();
+
+                TextBlock_message.Text = $"Database content ({i} records) printed to '{saveFileDialog.FileName}' file.";
+                TextBlock_message.Foreground = Brushes.LightGreen;
+                checkBox_fadeInOut.IsChecked = false;
+                checkBox_fadeInOut.IsChecked = true; // fade in-out gifImage, fade out TextBlock_message.Text
+                gifImage.StartAnimation();
             }
         }
 

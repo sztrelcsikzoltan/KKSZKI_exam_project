@@ -90,7 +90,7 @@ namespace FrontendWPF.StockService {
         private string LocationField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string NameField;
+        private string ProductField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<int> QuantityField;
@@ -132,14 +132,14 @@ namespace FrontendWPF.StockService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name {
+        public string Product {
             get {
-                return this.NameField;
+                return this.ProductField;
             }
             set {
-                if ((object.ReferenceEquals(this.NameField, value) != true)) {
-                    this.NameField = value;
-                    this.RaisePropertyChanged("Name");
+                if ((object.ReferenceEquals(this.ProductField, value) != true)) {
+                    this.ProductField = value;
+                    this.RaisePropertyChanged("Product");
                 }
             }
         }
@@ -544,22 +544,22 @@ namespace FrontendWPF.StockService {
         System.Threading.Tasks.Task<string> RemoveProductAsync(string uid, string id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStockService/ListSalePurchase", ReplyAction="http://tempuri.org/IStockService/ListSalePurchaseResponse")]
-        FrontendWPF.StockService.Response_SalePurchase ListSalePurchase(string uid, string type, string id, string product, string qOver, string qUnder, string before, string after, string location, string user, string limit);
+        FrontendWPF.StockService.Response_SalePurchase ListSalePurchase(string uid, string type, string id, string product, string qOver, string qUnder, string before, string after, string location, string username, string limit);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStockService/ListSalePurchase", ReplyAction="http://tempuri.org/IStockService/ListSalePurchaseResponse")]
-        System.Threading.Tasks.Task<FrontendWPF.StockService.Response_SalePurchase> ListSalePurchaseAsync(string uid, string type, string id, string product, string qOver, string qUnder, string before, string after, string location, string user, string limit);
+        System.Threading.Tasks.Task<FrontendWPF.StockService.Response_SalePurchase> ListSalePurchaseAsync(string uid, string type, string id, string product, string qOver, string qUnder, string before, string after, string location, string username, string limit);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStockService/AddSalePurchase", ReplyAction="http://tempuri.org/IStockService/AddSalePurchaseResponse")]
-        string AddSalePurchase(string uid, string type, string product, string quantity, string location);
+        string AddSalePurchase(string uid, string type, string product, string quantity, string location, string date);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStockService/AddSalePurchase", ReplyAction="http://tempuri.org/IStockService/AddSalePurchaseResponse")]
-        System.Threading.Tasks.Task<string> AddSalePurchaseAsync(string uid, string type, string product, string quantity, string location);
+        System.Threading.Tasks.Task<string> AddSalePurchaseAsync(string uid, string type, string product, string quantity, string location, string date);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStockService/UpdateSalePurchase", ReplyAction="http://tempuri.org/IStockService/UpdateSalePurchaseResponse")]
-        string UpdateSalePurchase(string uid, string id, string type, string product, string quantity, string date, string location, string user);
+        string UpdateSalePurchase(string uid, string id, string type, string product, string quantity, string date, string location, string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStockService/UpdateSalePurchase", ReplyAction="http://tempuri.org/IStockService/UpdateSalePurchaseResponse")]
-        System.Threading.Tasks.Task<string> UpdateSalePurchaseAsync(string uid, string id, string type, string product, string quantity, string date, string location, string user);
+        System.Threading.Tasks.Task<string> UpdateSalePurchaseAsync(string uid, string id, string type, string product, string quantity, string date, string location, string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStockService/RemoveSalePurchase", ReplyAction="http://tempuri.org/IStockService/RemoveSalePurchaseResponse")]
         string RemoveSalePurchase(string uid, string type, string id, string location);
@@ -659,28 +659,28 @@ namespace FrontendWPF.StockService {
             return base.Channel.RemoveProductAsync(uid, id);
         }
         
-        public FrontendWPF.StockService.Response_SalePurchase ListSalePurchase(string uid, string type, string id, string product, string qOver, string qUnder, string before, string after, string location, string user, string limit) {
-            return base.Channel.ListSalePurchase(uid, type, id, product, qOver, qUnder, before, after, location, user, limit);
+        public FrontendWPF.StockService.Response_SalePurchase ListSalePurchase(string uid, string type, string id, string product, string qOver, string qUnder, string before, string after, string location, string username, string limit) {
+            return base.Channel.ListSalePurchase(uid, type, id, product, qOver, qUnder, before, after, location, username, limit);
         }
         
-        public System.Threading.Tasks.Task<FrontendWPF.StockService.Response_SalePurchase> ListSalePurchaseAsync(string uid, string type, string id, string product, string qOver, string qUnder, string before, string after, string location, string user, string limit) {
-            return base.Channel.ListSalePurchaseAsync(uid, type, id, product, qOver, qUnder, before, after, location, user, limit);
+        public System.Threading.Tasks.Task<FrontendWPF.StockService.Response_SalePurchase> ListSalePurchaseAsync(string uid, string type, string id, string product, string qOver, string qUnder, string before, string after, string location, string username, string limit) {
+            return base.Channel.ListSalePurchaseAsync(uid, type, id, product, qOver, qUnder, before, after, location, username, limit);
         }
         
-        public string AddSalePurchase(string uid, string type, string product, string quantity, string location) {
-            return base.Channel.AddSalePurchase(uid, type, product, quantity, location);
+        public string AddSalePurchase(string uid, string type, string product, string quantity, string location, string date) {
+            return base.Channel.AddSalePurchase(uid, type, product, quantity, location, date);
         }
         
-        public System.Threading.Tasks.Task<string> AddSalePurchaseAsync(string uid, string type, string product, string quantity, string location) {
-            return base.Channel.AddSalePurchaseAsync(uid, type, product, quantity, location);
+        public System.Threading.Tasks.Task<string> AddSalePurchaseAsync(string uid, string type, string product, string quantity, string location, string date) {
+            return base.Channel.AddSalePurchaseAsync(uid, type, product, quantity, location, date);
         }
         
-        public string UpdateSalePurchase(string uid, string id, string type, string product, string quantity, string date, string location, string user) {
-            return base.Channel.UpdateSalePurchase(uid, id, type, product, quantity, date, location, user);
+        public string UpdateSalePurchase(string uid, string id, string type, string product, string quantity, string date, string location, string username) {
+            return base.Channel.UpdateSalePurchase(uid, id, type, product, quantity, date, location, username);
         }
         
-        public System.Threading.Tasks.Task<string> UpdateSalePurchaseAsync(string uid, string id, string type, string product, string quantity, string date, string location, string user) {
-            return base.Channel.UpdateSalePurchaseAsync(uid, id, type, product, quantity, date, location, user);
+        public System.Threading.Tasks.Task<string> UpdateSalePurchaseAsync(string uid, string id, string type, string product, string quantity, string date, string location, string username) {
+            return base.Channel.UpdateSalePurchaseAsync(uid, id, type, product, quantity, date, location, username);
         }
         
         public string RemoveSalePurchase(string uid, string type, string id, string location) {
