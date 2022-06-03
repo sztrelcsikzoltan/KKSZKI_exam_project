@@ -352,12 +352,12 @@ namespace FrontendWPF.Logs
             }
             int ASCII = (int)input[0];
             input = " "; // reset input to empty to avoid false value, becasuse KeyUp event may run on function keys as well
-            if ((ASCII > 31 && ASCII < 256) == false) { return; } // stop if not number or digit
+            if (((ASCII > 31 && ASCII < 256) || ASCII == 336 || ASCII == 337 || ASCII == 368 || ASCII == 369) == false) { return; } // stop if not number or digit expect Ő(336), ő(337), Ű(368), ű(369)
             // if (ASCII == 43 || ASCII == 60 || ASCII == 61 || ASCII == 62) { return; } // stop if +, <, =, >
             bool key = e.Key == Key.Back;
 
-            // stop on most function keys
-            if (e.Key != Key.Back && e.Key != Key.Delete && e.Key != Key.Oem102 && e.Key != Key.Subtract && e.Key != Key.OemPeriod && ((e.Key >= Key.A && e.Key <= Key.Z) || (e.Key >= Key.D0 && e.Key <= Key.D9) || (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)) == false)
+            // stop on most function keys, expect back, delete, <+í(Oem102), -, ., é(Oem1), ü(Oem2), ö(Oem3), ő(Oem4), Ű(Oem5), ú(Oem6), á(Oem7), Ó(OemPlus)
+            if (e.Key != Key.Back && e.Key != Key.Delete && e.Key != Key.Oem102 && e.Key != Key.Subtract && e.Key != Key.OemPeriod && e.Key != Key.Oem1 && e.Key != Key.Oem2 && e.Key != Key.Oem3 && e.Key != Key.Oem4 && e.Key != Key.Oem5 && e.Key != Key.Oem6 && e.Key != Key.Oem7 && e.Key != Key.OemPlus && ((e.Key >= Key.A && e.Key <= Key.Z) || (e.Key >= Key.D0 && e.Key <= Key.D9) || (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)) == false)
             {
                 return;
             }
@@ -415,12 +415,27 @@ namespace FrontendWPF.Logs
             {
                 Dispatcher.InvokeAsync(() =>
                 {
+                    SelectTextBox(); // this + Background priority needed to avoid wrong Key.End selection
+                }, DispatcherPriority.Input);
+                Dispatcher.InvokeAsync(() =>
+                {
                     // for some reason, cursor goes to the front of the cell when inputting into empty integer-type cell; therefore, set cursor to the end; skip if an operator is entered into cell
 
                     if (op != "=" && stopMessage == "") { textBox.Text = op + new_value; } // restore operator into cell, only if there is no error message (because it restores the old value);
 
                     Shared.SendKey(Key.End);
-                }, DispatcherPriority.Input);
+                }, DispatcherPriority.Background);
+            }
+            void SelectTextBox()
+            {
+                cell.Focus();
+                cell.IsEditing = true;
+
+                cell.MoveFocus(new TraversalRequest(FocusNavigationDirection.Down)); // move focus to textBox
+                cell.MoveFocus(new TraversalRequest(FocusNavigationDirection.Down));
+                textBox = (TextBox)cell.Content;
+                // Keyboard.Focus(textBox);
+                textBox.SelectAll();
             }
 
             // check data correctness
@@ -490,7 +505,9 @@ namespace FrontendWPF.Logs
             filteredStocksList.Clear();
             foreach (var stock in logList)
             {
-               if ((stock_filter.LogDate == null || (minutesExist ? Compare(stock.LogDate, stock_filter.LogDate, opLogDate) : Compare(stock.LogDate.Value.Date, stock_filter.LogDate, opLogDate))) && (stock_filter.LogUsername == "" || stock.LogUsername.ToLower().Contains(stock_filter.LogUsername.ToLower())) && (stock_filter.LogOperation == "" || stock.LogOperation.ToLower().Contains(stock_filter.LogOperation.ToLower())) && (stock_filter.Id == null || Compare(stock.Id, stock_filter.Id, opId)) && (stock_filter.Product == "" || stock.Product.ToLower().Contains(stock_filter.Product.ToLower())) && (stock_filter.Quantity == null || Compare(stock.Quantity, stock_filter.Quantity, opQuantity)) && (stock_filter.Location == "" || stock.Location.ToLower().Contains(stock_filter.Location.ToLower())))
+                DateTime roundedLogDate = (DateTime)stock.LogDate;
+                roundedLogDate = roundedLogDate.AddSeconds(-roundedLogDate.Second);
+                if ((stock_filter.LogDate == null || (minutesExist ? Compare(roundedLogDate, stock_filter.LogDate, opLogDate) : Compare(stock.LogDate.Value.Date, stock_filter.LogDate, opLogDate))) && (stock_filter.LogUsername == "" || stock.LogUsername.ToLower().Contains(stock_filter.LogUsername.ToLower())) && (stock_filter.LogOperation == "" || stock.LogOperation.ToLower().Contains(stock_filter.LogOperation.ToLower())) && (stock_filter.Id == null || Compare(stock.Id, stock_filter.Id, opId)) && (stock_filter.Product == "" || stock.Product.ToLower().Contains(stock_filter.Product.ToLower())) && (stock_filter.Quantity == null || Compare(stock.Quantity, stock_filter.Quantity, opQuantity)) && (stock_filter.Location == "" || stock.Location.ToLower().Contains(stock_filter.Location.ToLower())))
                 {
                     filteredStocksList.Add(stock);
                     continue;

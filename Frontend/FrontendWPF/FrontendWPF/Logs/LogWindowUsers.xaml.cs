@@ -359,12 +359,12 @@ namespace FrontendWPF.Logs
             }
             int ASCII = (int)input[0];
             input = " "; // reset input to empty to avoid false value, becasuse KeyUp event may run on function keys as well
-            if ((ASCII > 31 && ASCII < 256) == false) { return; } // stop if not number or digit
+            if (((ASCII > 31 && ASCII < 256) || ASCII == 336 || ASCII == 337 || ASCII == 368 || ASCII == 369) == false) { return; } // stop if not number or digit expect Ő(336), ő(337), Ű(368), ű(369)
             // if (ASCII == 43 || ASCII == 60 || ASCII == 61 || ASCII == 62) { return; } // stop if +, <, =, >
             bool key = e.Key == Key.Back;
 
-            // stop on most function keys
-            if (e.Key != Key.Back && e.Key != Key.Delete && e.Key != Key.Oem102 && e.Key != Key.Subtract && e.Key != Key.OemPeriod && ((e.Key >= Key.A && e.Key <= Key.Z) || (e.Key >= Key.D0 && e.Key <= Key.D9) || (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)) == false)
+            // stop on most function keys, expect back, delete, <+í(Oem102), -, ., é(Oem1), ü(Oem2), ö(Oem3), ő(Oem4), Ű(Oem5), ú(Oem6), á(Oem7), Ó(OemPlus)
+            if (e.Key != Key.Back && e.Key != Key.Delete && e.Key != Key.Oem102 && e.Key != Key.Subtract && e.Key != Key.OemPeriod && e.Key != Key.Oem1 && e.Key != Key.Oem2 && e.Key != Key.Oem3 && e.Key != Key.Oem4 && e.Key != Key.Oem5 && e.Key != Key.Oem6 && e.Key != Key.Oem7 && e.Key != Key.OemPlus && ((e.Key >= Key.A && e.Key <= Key.Z) || (e.Key >= Key.D0 && e.Key <= Key.D9) || (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)) == false)
             {
                 return;
             }
@@ -425,12 +425,27 @@ namespace FrontendWPF.Logs
             {
                 Dispatcher.InvokeAsync(() =>
                 {
+                    SelectTextBox(); // this + Background priority needed to avoid wrong Key.End selection
+                }, DispatcherPriority.Input);
+                Dispatcher.InvokeAsync(() =>
+                {
                     // for some reason, cursor goes to the front of the cell when inputting into empty integer-type cell; therefore, set cursor to the end; skip if an operator is entered into cell
 
                     if (op != "=" && stopMessage == "") { textBox.Text = op + new_value; } // restore operator into cell, only if there is no error message (because it restores the old value);
 
                     Shared.SendKey(Key.End);
-                }, DispatcherPriority.Input);
+                }, DispatcherPriority.Background);
+            }
+            void SelectTextBox()
+            {
+                cell.Focus();
+                cell.IsEditing = true;
+
+                cell.MoveFocus(new TraversalRequest(FocusNavigationDirection.Down)); // move focus to textBox
+                cell.MoveFocus(new TraversalRequest(FocusNavigationDirection.Down));
+                textBox = (TextBox)cell.Content;
+                // Keyboard.Focus(textBox);
+                textBox.SelectAll();
             }
 
             // check data correctness
@@ -503,7 +518,9 @@ namespace FrontendWPF.Logs
             filteredUsersList.Clear();
             foreach (var user in logList)
             {
-                if ((user_filter.LogDate == null || (minutesExist ? Compare(user.LogDate, user_filter.LogDate, opLogDate) : Compare(user.LogDate.Value.Date, user_filter.LogDate, opLogDate))) && (user_filter.LogUsername == "" || user.LogUsername.ToLower().Contains(user_filter.LogUsername.ToLower())) && (user_filter.LogOperation == "" || user.LogOperation.ToLower().Contains(user_filter.LogOperation.ToLower())) && (user_filter.Id == null || Compare(user.Id, user_filter.Id, opId)) && (user_filter.Username == "" || user.Username.ToLower().Contains(user_filter.Username.ToLower())) && (password == "" || user.Password == password) && (user_filter.Location == "" || user.Location.ToLower().Contains(user_filter.Location.ToLower())) && (user_filter.Permission == null || Compare(user.Permission, user_filter.Permission, opPermission)) && (user_filter.Active == null || Compare(user.Active, user_filter.Active, opActive)))
+                DateTime roundedLogDate = (DateTime)user.LogDate;
+                roundedLogDate = roundedLogDate.AddSeconds(-roundedLogDate.Second);
+                if ((user_filter.LogDate == null || (minutesExist ? Compare(roundedLogDate, user_filter.LogDate, opLogDate) : Compare(user.LogDate.Value.Date, user_filter.LogDate, opLogDate))) && (user_filter.LogUsername == "" || user.LogUsername.ToLower().Contains(user_filter.LogUsername.ToLower())) && (user_filter.LogOperation == "" || user.LogOperation.ToLower().Contains(user_filter.LogOperation.ToLower())) && (user_filter.Id == null || Compare(user.Id, user_filter.Id, opId)) && (user_filter.Username == "" || user.Username.ToLower().Contains(user_filter.Username.ToLower())) && (password == "" || user.Password == password) && (user_filter.Location == "" || user.Location.ToLower().Contains(user_filter.Location.ToLower())) && (user_filter.Permission == null || Compare(user.Permission, user_filter.Permission, opPermission)) && (user_filter.Active == null || Compare(user.Active, user_filter.Active, opActive)))
                 {
                     filteredUsersList.Add(user);
                     continue;

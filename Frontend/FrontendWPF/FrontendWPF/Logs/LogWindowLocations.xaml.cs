@@ -350,17 +350,17 @@ namespace FrontendWPF.Logs
             }
             int ASCII = (int)input[0];
             input = " "; // reset input to empty to avoid false value, becasuse KeyUp event may run on function keys as well
-            if ((ASCII > 31 && ASCII < 256) == false) { return; } // stop if not number or digit
+            if (((ASCII > 31 && ASCII < 256) || ASCII == 336 || ASCII == 337 || ASCII == 368 || ASCII == 369) == false ) { return; } // stop if not number or digit expect Ő(336), ő(337), Ű(368), ű(369)
             // if (ASCII == 43 || ASCII == 60 || ASCII == 61 || ASCII == 62) { return; } // stop if +, <, =, >
             bool key = e.Key == Key.Back;
 
-            // stop on most function keys
-            if (e.Key != Key.Back && e.Key != Key.Delete && e.Key != Key.Oem102 && e.Key != Key.Subtract && e.Key != Key.OemPeriod && ((e.Key >= Key.A && e.Key <= Key.Z) || (e.Key >= Key.D0 && e.Key <= Key.D9) || (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)) == false)
+            // stop on most function keys, expect back, delete, <+í(Oem102), -, ., é(Oem1), ü(Oem2), ö(Oem3), ő(Oem4), Ű(Oem5), ú(Oem6), á(Oem7), Ó(OemPlus)
+            if (e.Key != Key.Back && e.Key != Key.Delete && e.Key != Key.Oem102 && e.Key != Key.Subtract && e.Key != Key.OemPeriod && e.Key != Key.Oem1 && e.Key != Key.Oem2 && e.Key != Key.Oem3 && e.Key != Key.Oem4 && e.Key != Key.Oem5 && e.Key != Key.Oem6 && e.Key != Key.Oem7 && e.Key != Key.OemPlus && ((e.Key >= Key.A && e.Key <= Key.Z) || (e.Key >= Key.D0 && e.Key <= Key.D9) || (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)) == false)
             {
                 return;
             }
 
-            filterc_index = column0.DisplayIndex;
+           filterc_index = column0.DisplayIndex;
             cell = dataGrid1.Columns[filterc_index].GetCellContent(row0).Parent as DataGridCell;
             if (cell.IsEditing == false) { return; } // stop if cell is not editing
             textBox = (TextBox)cell.Content;
@@ -412,12 +412,27 @@ namespace FrontendWPF.Logs
             {
                 Dispatcher.InvokeAsync(() =>
                 {
+                    SelectTextBox(); // this + Background priority needed to avoid wrong Key.End selection
+                }, DispatcherPriority.Input);
+                Dispatcher.InvokeAsync(() =>
+                {
                     // for some reason, cursor goes to the front of the cell when inputting into empty integer-type cell; therefore, set cursor to the end; skip if an operator is entered into cell
 
                     if (op != "=" && stopMessage == "") { textBox.Text = op + new_value; } // restore operator into cell, only if there is no error message (because it restores the old value);
 
                     Shared.SendKey(Key.End);
-                }, DispatcherPriority.Input);
+                }, DispatcherPriority.Background);
+            }
+            void SelectTextBox()
+            {
+                cell.Focus();
+                cell.IsEditing = true;
+
+                cell.MoveFocus(new TraversalRequest(FocusNavigationDirection.Down)); // move focus to textBox
+                cell.MoveFocus(new TraversalRequest(FocusNavigationDirection.Down));
+                textBox = (TextBox)cell.Content;
+                // Keyboard.Focus(textBox);
+                textBox.SelectAll();
             }
 
             // check data correctness
@@ -480,7 +495,7 @@ namespace FrontendWPF.Logs
                 return;
             }
 
-            if (filterc_index == 1 || filterc_index == 2 || filterc_index == 4) // // update string-type fields with new value ( LogUsername, LogOperation, Name)
+            if (filterc_index == 1 || filterc_index == 2 || filterc_index == 4 || filterc_index == 5) // // update string-type fields with new value ( LogUsername, LogOperation, Name, Region)
             {
                 location_filter.GetType().GetProperty(changed_property_name).SetValue(location_filter, new_value);
             }
@@ -499,7 +514,9 @@ namespace FrontendWPF.Logs
             filteredLocationsList.Clear();
             foreach (var location in logList)
             {
-                if ((location_filter.LogDate == null || (minutesExist ? Compare(location.LogDate, location_filter.LogDate, opLogDate) : Compare(location.LogDate.Value.Date, location_filter.LogDate, opLogDate))) && (location_filter.LogUsername == "" || location.LogUsername.ToLower().Contains(location_filter.LogUsername.ToLower())) && (location_filter.LogOperation == "" || location.LogOperation.ToLower().Contains(location_filter.LogOperation.ToLower())) && (location_filter.Id == null || Compare(location.Id, location_filter.Id, opId)) && (location_filter.Name == "" || location.Name.ToLower().Contains(location_filter.Name.ToLower())) && (location_filter.Region == "" || location.Region.ToLower().Contains(location_filter.Region.ToLower())))
+                DateTime roundedLogDate = (DateTime)location.LogDate;
+                roundedLogDate = roundedLogDate.AddSeconds(-roundedLogDate.Second);
+                if ((location_filter.LogDate == null || (minutesExist ? Compare(roundedLogDate, location_filter.LogDate, opLogDate) : Compare(location.LogDate.Value.Date, location_filter.LogDate, opLogDate))) && (location_filter.LogUsername == "" || location.LogUsername.ToLower().Contains(location_filter.LogUsername.ToLower())) && (location_filter.LogOperation == "" || location.LogOperation.ToLower().Contains(location_filter.LogOperation.ToLower())) && (location_filter.Id == null || Compare(location.Id, location_filter.Id, opId)) && (location_filter.Name == "" || location.Name.ToLower().Contains(location_filter.Name.ToLower())) && (location_filter.Region == "" || location.Region.ToLower().Contains(location_filter.Region.ToLower())))
                 {
                     filteredLocationsList.Add(location);
                     continue;
