@@ -1,6 +1,6 @@
 # Exam project
 
-Storage Manager is a warehouse management application that allows you to manage various products from any distance, not only from stationary offices, but also on the go, via mobile devices. The user can choose to manage from a web interface or a desktop application. The requests run into the backend application. It processes the instructions and forwards them to the central database. There, the instructions are executed, resulting either in the database being read or modified. The backend application then returns the requested data or responses to the user.
+Storage Manager is a warehouse management application that allows you to manage various products from any distance, not only from stationary offices, but also on the go, via mobile devices. The user can choose to manage from a web interface or a desktop application. The requests run into the backend application. It processes the instructions and forwards them to the central database. There, the instructions are executed, resulting either in the database being read or modified. The backend application then returns the requested data or responses to the user. The project was created in a two-man team consisting of Mr. Adam Peter Kirsch and Mr. Zoltan Sztrelcsik.
 
 Technologies used:
 - the frontend web application has been supplemented with the popular React library
@@ -13,7 +13,7 @@ Technologies used:
 
 # Vizsga-Project
 
-A Storage Manager egy raktárkezelő alkalmazás, amely többek között különböző termékek kezelését teszi lehetővé bármilyen távolságból, nemcsak helyhez kötött irodákból, hanem útközben, mobil eszközökön keresztül is. A felhasználó választhat, hogy a kezelést webes felületről, vagy asztali alkalmazásból végzi. Ennek során a kérések a backend alkalmazásba futnak be. Ez feldolgozza az utasításokat, továbbítja a központi adatbázisba. Itt az utasítások végrehajtásra kerülnek, ami vagy az adatbázis olvasását, vagy annak módosítását eredményezi. Ezt követően a backend alkalmazás a lekért adatokat illetve válaszokat elküldi a felhasználónak. 
+A Storage Manager egy raktárkezelő alkalmazás, amely többek között különböző termékek kezelését teszi lehetővé bármilyen távolságból, nemcsak helyhez kötött irodákból, hanem útközben, mobil eszközökön keresztül is. A felhasználó választhat, hogy a kezelést webes felületről, vagy asztali alkalmazásból végzi. Ennek során a kérések a backend alkalmazásba futnak be. Ez feldolgozza az utasításokat, továbbítja a központi adatbázisba. Itt az utasítások végrehajtásra kerülnek, ami vagy az adatbázis olvasását, vagy annak módosítását eredményezi. Ezt követően a backend alkalmazás a lekért adatokat illetve válaszokat elküldi a felhasználónak. A projektet egy két fős csapat készítette, melynek tagjai Kirsch Ádám Péter és Sztrelcsik Zoltán.
 
 Felhasznált technológiák:
 - a webes frontend alkalmazás a népszerű React könyvtárral lett kiegészítve 
