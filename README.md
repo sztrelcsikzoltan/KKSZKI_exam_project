@@ -1,14 +1,14 @@
 # Exam project
 
-Storage Manager is a warehouse management application that allows you to manage various products from any distance, not only from stationary offices, but also on the go, via mobile devices. The user can choose to manage from a web interface or a desktop application. The During this, requests run into the backend application. It processes the instructions and forwards them to the central database. Here, the instructions are executed, which either results in the database being read or modified. The backend application then sends the requested data or responses to the user.
+Storage Manager is a warehouse management application that allows you to manage various products from any distance, not only from stationary offices, but also on the go, via mobile devices. The user can choose to manage from a web interface or a desktop application. The requests run into the backend application. It processes the instructions and forwards them to the central database. There, the instructions are executed, resulting either in the database being read or modified. The backend application then returns the requested data or responses to the user.
 
 Technologies used:
-- the web frontend application has been supplemented with the popular React library
+- the frontend web application has been supplemented with the popular React library
 - the desktop frontend application is based on the proven WPF technology
 - the backend application is based on WCF technology
 - communication between frontend and backend takes place via HTTP protocol, using RESTful architecture
 - we use HTTP methods (GET, POST, PUT, DELETE) to manage the stored data, which ensure the retrieval, addition, modification or deletion of the data
-- the database is maintained in a MySQL database management system
+- the database is maintained in MySQL database management system
 
 
 # Vizsga-Project
