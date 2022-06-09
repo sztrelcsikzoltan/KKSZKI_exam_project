@@ -38,7 +38,7 @@ INSERT INTO `locations` (`id`, `name`, `regionId`) VALUES
 (15, 'Topeka', 14),
 (16, 'Frankfort', 15),
 (17, 'Des Moines', 13),
-(18, 'Eger', 17),
+(18, 'Boston', 17),
 (19, 'Baton Rouge', 16),
 (20, 'New Castle', 6),
 (22, 'Lincoln', 18),
