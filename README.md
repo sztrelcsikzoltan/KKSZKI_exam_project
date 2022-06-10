@@ -76,6 +76,6 @@ Storage Manager is a warehouse management application that allows you to manage 
 </p>
 <hr/>
 <p align="left">
-  <img src="Documentation/WPF client images/20 install processs.png" alt="Intallation process" title="Installation process" />
+  <img src="Documentation/WPF client images/20 install process.png" alt="Intallation process" title="Installation process" />
 </p>
 <hr/>
