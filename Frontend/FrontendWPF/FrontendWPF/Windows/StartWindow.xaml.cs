@@ -251,11 +251,6 @@ namespace FrontendWPF.Windows
 
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
-               
 
         ManageUsersWindow ManageUsersWindow;
         private void button_ManageUsersWindow_Click(object sender, RoutedEventArgs e)
@@ -328,12 +323,7 @@ namespace FrontendWPF.Windows
             }
         }
 
-        private void MenuItem_exit_Click(object sender, RoutedEventArgs e)
-        {
-            CloseWindow();
-        }
-
-        private void button_Exit_Click(object sender, RoutedEventArgs e)
+         private void button_Exit_Click(object sender, RoutedEventArgs e)
         {
             CloseWindow();
         }

@@ -58,35 +58,7 @@
     </Window.Triggers>
 
     <DockPanel>
-        <Menu DockPanel.Dock="Top" Background="LightSteelBlue" Padding="0,2" Visibility="Collapsed">
-            <MenuItem Header="Menu1">
-                <MenuItem Header="MenuItem1">
-                    <MenuItem.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="LightSteelBlue" Offset="0"/>
-                            <GradientStop Color="#FFF1F3FF" Offset="1"/>
-                        </LinearGradientBrush>
-                    </MenuItem.Background>
-                </MenuItem>
-                <Separator />
-                <MenuItem Header="Exit" Click="MenuItem_exit_Click">
-                    <MenuItem.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="LightSteelBlue" Offset="0"/>
-                            <GradientStop Color="#FFF1F3FF" Offset="1"/>
-                        </LinearGradientBrush>
-                    </MenuItem.Background>
-                </MenuItem>
-            </MenuItem>
-            <MenuItem Header="Menu2" Click="MenuItem_Click" />
-            <MenuItem Header="Menu3" />
-            <MenuItem Header="Templates">
-                
-            </MenuItem>
-        </Menu>
-
-
-
+        
         <!--Items bar-->
         <Label DockPanel.Dock="Top" Content="STORAGE MANAGER" HorizontalAlignment="Stretch" 
                HorizontalContentAlignment="Left" Padding="20,0,0,0" Background="#FF7C3763" FontSize="20" Foreground="AliceBlue">
