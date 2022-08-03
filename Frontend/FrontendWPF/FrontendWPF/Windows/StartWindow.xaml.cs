@@ -251,75 +251,74 @@ namespace FrontendWPF.Windows
 
         }
 
-
-        ManageUsersWindow ManageUsersWindow;
+        private ManageUsersWindow _manageUsersWindow;
         private void button_ManageUsersWindow_Click(object sender, RoutedEventArgs e)
         {
             Shared.layout = "";
             // show only if not open already (to avoid multiple instances)
-            if (!Application.Current.Windows.OfType<Window>().Contains(ManageUsersWindow))
+            if (!Application.Current.Windows.OfType<Window>().Contains(_manageUsersWindow))
             {
-                ManageUsersWindow = new ManageUsersWindow();
-                if (ManageUsersWindow.IsEnabled) ManageUsersWindow.Show();
+                _manageUsersWindow = new ManageUsersWindow();
+                if (_manageUsersWindow.IsEnabled) _manageUsersWindow.Show();
             }
         }
 
-        ManageProductsWindow ManageProductsWindow;
+        private ManageProductsWindow _manageProductsWindow;
         private void button_ManageProductsWindow_Click(object sender, RoutedEventArgs e)
         {
             Shared.layout = "";
             // show only if not open already (to avoid multiple instances)
-            if (!Application.Current.Windows.OfType<Window>().Contains(ManageProductsWindow))
+            if (!Application.Current.Windows.OfType<Window>().Contains(_manageProductsWindow))
             {
-                ManageProductsWindow = new ManageProductsWindow();
-                if (ManageProductsWindow.IsEnabled) ManageProductsWindow.Show();
+                _manageProductsWindow = new ManageProductsWindow();
+                if (_manageProductsWindow.IsEnabled) _manageProductsWindow.Show();
             }
         }
 
-        ManagePurchasesWindow ManagePurchasesWindow;
+        ManagePurchasesWindow _managePurchasesWindow;
         private void button_ManagePurchasesWindow_Click(object sender, RoutedEventArgs e)
         {
             Shared.layout = "";
             // show only if not open already (to avoid multiple instances)
-            if (!Application.Current.Windows.OfType<Window>().Contains(ManagePurchasesWindow))
+            if (!Application.Current.Windows.OfType<Window>().Contains(_managePurchasesWindow))
             {
-                ManagePurchasesWindow = new ManagePurchasesWindow();
-                if (ManagePurchasesWindow.IsEnabled) ManagePurchasesWindow.Show();
+                _managePurchasesWindow = new ManagePurchasesWindow();
+                if (_managePurchasesWindow.IsEnabled) _managePurchasesWindow.Show();
             }
         }
 
-        ManageSalesWindow ManageSalesWindow;
+        private ManageSalesWindow _manageSalesWindow;
         private void button_ManageSalesWindow_Click(object sender, RoutedEventArgs e)
         {
             Shared.layout = "";
             // show only if not open already (to avoid multiple instances)
-            if (!Application.Current.Windows.OfType<Window>().Contains(ManageSalesWindow))
+            if (!Application.Current.Windows.OfType<Window>().Contains(_manageSalesWindow))
             {
-                ManageSalesWindow = new ManageSalesWindow();
-                if (ManageSalesWindow.IsEnabled) ManageSalesWindow.Show();
+                _manageSalesWindow = new ManageSalesWindow();
+                if (_manageSalesWindow.IsEnabled) _manageSalesWindow.Show();
             }
         }
 
-        ManageStocksWindow ManageStocksWindow;
+        private ManageStocksWindow _manageStocksWindow;
         private void button_ManageStocksWindow_Click(object sender, RoutedEventArgs e)
         {
             // show only if not open already (to avoid multiple instances)
-            if (!Application.Current.Windows.OfType<Window>().Contains(ManageStocksWindow))
+            if (!Application.Current.Windows.OfType<Window>().Contains(_manageStocksWindow))
             {
-                ManageStocksWindow = new ManageStocksWindow();
-                if (ManageStocksWindow.IsEnabled) ManageStocksWindow.Show();
+                _manageStocksWindow = new ManageStocksWindow();
+                if (_manageStocksWindow.IsEnabled) _manageStocksWindow.Show();
             }
         }
 
-        ManageLocationsWindow ManageLocationsWindow;
+        private ManageLocationsWindow _manageLocationsWindow;
         private void button_ManageLocationsWindow_Click(object sender, RoutedEventArgs e)
         {
             Shared.layout = "";
             // show only if not open already (to avoid multiple instances)
-            if (!Application.Current.Windows.OfType<Window>().Contains(ManageLocationsWindow))
+            if (!Application.Current.Windows.OfType<Window>().Contains(_manageLocationsWindow))
             {
-                ManageLocationsWindow = new ManageLocationsWindow();
-                if (ManageLocationsWindow.IsEnabled) ManageLocationsWindow.Show();
+                _manageLocationsWindow = new ManageLocationsWindow();
+                if (_manageLocationsWindow.IsEnabled) _manageLocationsWindow.Show();
             }
         }
 
@@ -373,20 +372,20 @@ namespace FrontendWPF.Windows
             string buttonName = ((Button)sender).Name;
             Shared.layout = buttonName;
             // show only if not open already (to avoid multiple instances)
-            if (!Application.Current.Windows.OfType<Window>().Contains(ManageProductsWindow))
+            if (!Application.Current.Windows.OfType<Window>().Contains(_manageProductsWindow))
             {
-                ManageProductsWindow = new ManageProductsWindow();
-                if (ManageProductsWindow.IsEnabled) ManageProductsWindow.Show();
+                _manageProductsWindow = new ManageProductsWindow();
+                if (_manageProductsWindow.IsEnabled) _manageProductsWindow.Show();
             }
-            if(buttonName.Contains("Purchases") && !Application.Current.Windows.OfType<Window>().Contains(ManagePurchasesWindow))
+            if(buttonName.Contains("Purchases") && !Application.Current.Windows.OfType<Window>().Contains(_managePurchasesWindow))
             {
-                ManagePurchasesWindow = new ManagePurchasesWindow();
-                if (ManagePurchasesWindow.IsEnabled) ManagePurchasesWindow.Show();
+                _managePurchasesWindow = new ManagePurchasesWindow();
+                if (_managePurchasesWindow.IsEnabled) _managePurchasesWindow.Show();
             }
-            else if (buttonName.Contains("Sales") && !Application.Current.Windows.OfType<Window>().Contains(ManageSalesWindow))
+            else if (buttonName.Contains("Sales") && !Application.Current.Windows.OfType<Window>().Contains(_manageSalesWindow))
             {
-                ManageSalesWindow = new ManageSalesWindow();
-                if (ManageSalesWindow.IsEnabled) ManageSalesWindow.Show();
+                _manageSalesWindow = new ManageSalesWindow();
+                if (_manageSalesWindow.IsEnabled) _manageSalesWindow.Show();
             }
         }
 
@@ -395,15 +394,15 @@ namespace FrontendWPF.Windows
             string buttonName = ((Button)sender).Name;
             Shared.layout = buttonName;
             // show only if not open already (to avoid multiple instances)
-            if (!Application.Current.Windows.OfType<Window>().Contains(ManagePurchasesWindow))
+            if (!Application.Current.Windows.OfType<Window>().Contains(_managePurchasesWindow))
             {
-                ManagePurchasesWindow = new ManagePurchasesWindow();
-                if (ManagePurchasesWindow.IsEnabled) ManagePurchasesWindow.Show();
+                _managePurchasesWindow = new ManagePurchasesWindow();
+                if (_managePurchasesWindow.IsEnabled) _managePurchasesWindow.Show();
             }
-            if (!Application.Current.Windows.OfType<Window>().Contains(ManageSalesWindow))
+            if (!Application.Current.Windows.OfType<Window>().Contains(_manageSalesWindow))
             {
-                ManageSalesWindow = new ManageSalesWindow();
-                if (ManageSalesWindow.IsEnabled) ManageSalesWindow.Show();
+                _manageSalesWindow = new ManageSalesWindow();
+                if (_manageSalesWindow.IsEnabled) _manageSalesWindow.Show();
             }
         }
 
