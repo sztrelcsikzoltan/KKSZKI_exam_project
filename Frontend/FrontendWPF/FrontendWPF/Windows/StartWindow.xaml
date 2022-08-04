@@ -10,6 +10,7 @@
         Closing="Window_Closing"
         Closed="Window_Closed"
         Loaded="Window_Loaded"
+        x:Name="Window"
         Title="StartWindow" Height="510" MinHeight="510" Width="800" MinWidth="600"
         ResizeMode="CanResize"
         WindowStyle="None"
@@ -47,7 +48,7 @@
             <BeginStoryboard>
                 <Storyboard Name="WindowFadeOut" Completed="WindowFadeOut_Completed">
                     <DoubleAnimation Name="WindowFadeOutAnimation"
-                                     Storyboard.TargetName="window"
+                                     Storyboard.TargetName="Window"
                                      Storyboard.TargetProperty="(Window.Opacity)"
                                      From="1.0" To="0" Duration="0:0:2"
                                      AutoReverse="False" RepeatBehavior="1x" />
