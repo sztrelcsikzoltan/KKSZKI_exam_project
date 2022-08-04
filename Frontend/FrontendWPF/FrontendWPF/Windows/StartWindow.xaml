@@ -10,7 +10,6 @@
         Closing="Window_Closing"
         Closed="Window_Closed"
         Loaded="Window_Loaded"
-        x:Name="window"
         Title="StartWindow" Height="510" MinHeight="510" Width="800" MinWidth="600"
         ResizeMode="CanResize"
         WindowStyle="None"
