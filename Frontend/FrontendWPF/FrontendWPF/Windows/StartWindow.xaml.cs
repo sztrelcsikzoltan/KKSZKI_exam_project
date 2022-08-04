@@ -310,15 +310,15 @@ namespace FrontendWPF.Windows
             }
         }
 
-        private ManageLocationsWindow _manageLocationsWindow;
+        private ManageLocationsWindow ManageLocationsWindow;
         private void button_ManageLocationsWindow_Click(object sender, RoutedEventArgs e)
         {
             Shared.layout = "";
             // show only if not open already (to avoid multiple instances)
-            if (!Application.Current.Windows.OfType<Window>().Contains(_manageLocationsWindow))
+            if (!Application.Current.Windows.OfType<Window>().Contains(ManageLocationsWindow))
             {
-                _manageLocationsWindow = new ManageLocationsWindow();
-                if (_manageLocationsWindow.IsEnabled) _manageLocationsWindow.Show();
+                ManageLocationsWindow = new ManageLocationsWindow();
+                if (ManageLocationsWindow.IsEnabled) ManageLocationsWindow.Show();
             }
         }
 
@@ -351,9 +351,6 @@ namespace FrontendWPF.Windows
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            bool loaded = this.IsLoaded;
-            // this.Close();
-
             WindowCollection collection = Application.Current.Windows;
             foreach (Window window in collection)
             {
