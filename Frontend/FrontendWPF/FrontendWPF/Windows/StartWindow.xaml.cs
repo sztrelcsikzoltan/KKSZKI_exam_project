@@ -21,9 +21,9 @@ namespace FrontendWPF.Windows
     public partial class StartWindow : Window
     {
         // Dummy columns for layers 0 and 1:
-        readonly ColumnDefinition colOneCopyForLayer0;
-        readonly ColumnDefinition colTwoCopyForLayer0;
-        readonly ColumnDefinition colTwoCopyForLayer1;
+        private readonly ColumnDefinition _colOneCopyForLayer0;
+        private readonly ColumnDefinition _colTwoCopyForLayer0;
+        private readonly ColumnDefinition _colTwoCopyForLayer1;
         private bool closeCompleted = false;
 
         private List<BitmapImage> imagesList = new List<BitmapImage>();
@@ -38,12 +38,12 @@ namespace FrontendWPF.Windows
             Shared.screenHeight = System.Windows.SystemParameters.WorkArea.Height;
 
             // Initialize the dummy (grouped) columns that are created during docking:
-            colOneCopyForLayer0 = new ColumnDefinition();
-            colOneCopyForLayer0.SharedSizeGroup = "column1";
-            colTwoCopyForLayer0 = new ColumnDefinition();
-            colTwoCopyForLayer0.SharedSizeGroup = "column2";
-            colTwoCopyForLayer1 = new ColumnDefinition();
-            colTwoCopyForLayer1.SharedSizeGroup = "column2";
+            _colOneCopyForLayer0 = new ColumnDefinition();
+            _colOneCopyForLayer0.SharedSizeGroup = "column1";
+            _colTwoCopyForLayer0 = new ColumnDefinition();
+            _colTwoCopyForLayer0.SharedSizeGroup = "column2";
+            _colTwoCopyForLayer1 = new ColumnDefinition();
+            _colTwoCopyForLayer1.SharedSizeGroup = "column2";
         }
 
         // Toggle panel 1 between docked and undocked states
@@ -126,9 +126,9 @@ namespace FrontendWPF.Windows
                 panel1PinImg.Source = new BitmapImage(new Uri("/Resources/Images/PinVer1col.png", UriKind.Relative));
 
                 // Add the cloned column to layer 0:
-                layer0.ColumnDefinitions.Add(colOneCopyForLayer0);
+                layer0.ColumnDefinitions.Add(_colOneCopyForLayer0);
                 // Add the cloned column to layer 1, but only if pane 2 is docked:
-                if (button_panel2.Visibility == Visibility.Collapsed) gridlayer1.ColumnDefinitions.Add(colTwoCopyForLayer1);
+                if (button_panel2.Visibility == Visibility.Collapsed) gridlayer1.ColumnDefinitions.Add(_colTwoCopyForLayer1);
             }
             else if (paneNumber == 2)
             {
@@ -136,9 +136,9 @@ namespace FrontendWPF.Windows
                 panel2PinImg.Source = new BitmapImage(new Uri("/Resources/Images/PinVer1col.png", UriKind.Relative));
 
                 // Add the cloned column to layer 0:
-                layer0.ColumnDefinitions.Add(colTwoCopyForLayer0);
+                layer0.ColumnDefinitions.Add(_colTwoCopyForLayer0);
                 // Add the cloned column to layer 1, but only if pane 1 is docked:
-                if (button_panel1.Visibility == Visibility.Collapsed) gridlayer1.ColumnDefinitions.Add(colTwoCopyForLayer1);
+                if (button_panel1.Visibility == Visibility.Collapsed) gridlayer1.ColumnDefinitions.Add(_colTwoCopyForLayer1);
             }
         }
 
@@ -152,9 +152,9 @@ namespace FrontendWPF.Windows
                 panel1PinImg.Source = new BitmapImage(new Uri("/Resources/Images/PinHor1col.png", UriKind.Relative));
 
                 // Remove the cloned columns from layers 0 and 1:
-                layer0.ColumnDefinitions.Remove(colOneCopyForLayer0);
+                layer0.ColumnDefinitions.Remove(_colOneCopyForLayer0);
                 // This won't always be present, but Remove silently ignores bad columns:
-                gridlayer1.ColumnDefinitions.Remove(colTwoCopyForLayer1);
+                gridlayer1.ColumnDefinitions.Remove(_colTwoCopyForLayer1);
             }
             else if (panelNbr == 2)
             {
@@ -163,8 +163,8 @@ namespace FrontendWPF.Windows
                 panel2PinImg.Source = new BitmapImage(new Uri("/Resources/Images/PinHor1col.png", UriKind.Relative));
 
                 // Remove the cloned columns from layers 0 and 1:
-                layer0.ColumnDefinitions.Remove(colTwoCopyForLayer0);
-                gridlayer1.ColumnDefinitions.Remove(colTwoCopyForLayer1);
+                layer0.ColumnDefinitions.Remove(_colTwoCopyForLayer0);
+                gridlayer1.ColumnDefinitions.Remove(_colTwoCopyForLayer1);
             }
         }
 
