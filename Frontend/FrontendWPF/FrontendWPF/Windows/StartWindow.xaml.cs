@@ -24,7 +24,7 @@ namespace FrontendWPF.Windows
         private readonly ColumnDefinition _colOneCopyForLayer0;
         private readonly ColumnDefinition _colTwoCopyForLayer0;
         private readonly ColumnDefinition _colTwoCopyForLayer1;
-        private bool closeCompleted = false;
+        private bool _closeCompleted = false;
 
         private List<BitmapImage> imagesList = new List<BitmapImage>();
         private int imageNumber = 0;
@@ -336,7 +336,7 @@ namespace FrontendWPF.Windows
         }
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (!closeCompleted)
+            if (!_closeCompleted)
             {
                 WindowFadeOut.Begin();
                 e.Cancel = true;
@@ -345,7 +345,7 @@ namespace FrontendWPF.Windows
 
         private void WindowFadeOut_Completed(object sender, EventArgs e)
         {
-            closeCompleted = true;
+            _closeCompleted = true;
             Close();
         }
 
