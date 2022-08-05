@@ -21,9 +21,9 @@ namespace FrontendWPF.Windows
     public partial class StartWindow : Window
     {
         // Dummy columns for layers 0 and 1:
-        ColumnDefinition colOneCopyForLayer0;
-        ColumnDefinition colTwoCopyForLayer0;
-        ColumnDefinition colTwoCopyForLayer1;
+        readonly ColumnDefinition colOneCopyForLayer0;
+        readonly ColumnDefinition colTwoCopyForLayer0;
+        readonly ColumnDefinition colTwoCopyForLayer1;
         private bool closeCompleted = false;
 
         private List<BitmapImage> imagesList = new List<BitmapImage>();
