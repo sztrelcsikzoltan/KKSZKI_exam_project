@@ -26,7 +26,7 @@ namespace FrontendWPF.Windows
         private readonly ColumnDefinition _colTwoCopyForLayer1;
         private bool _closeCompleted = false;
 
-        private List<BitmapImage> imagesList = new List<BitmapImage>();
+        private readonly List<BitmapImage> _imagesList = new List<BitmapImage>();
         private int imageNumber = 0;
         public DispatcherTimer pictureTimer = new DispatcherTimer();
 
@@ -430,12 +430,12 @@ namespace FrontendWPF.Windows
                 if ((file_info.Extension.ToLower() == ".jpg") ||
                     (file_info.Extension.ToLower() == ".png"))
                 {
-                    imagesList.Add(new BitmapImage(new Uri(file_info.FullName)));
+                    _imagesList.Add(new BitmapImage(new Uri(file_info.FullName)));
                 }
             }
 
             // Display the first image.
-            imageBackground.Source = imagesList[0];
+            imageBackground.Source = _imagesList[0];
 
             // Install a timer to show each image.
             pictureTimer.Interval = TimeSpan.FromSeconds(5);
@@ -446,7 +446,7 @@ namespace FrontendWPF.Windows
         // Display the next image.
         private void Tick(object sender, System.EventArgs e)
         {
-            imageNumber = (imageNumber + 1) % imagesList.Count;
+            imageNumber = (imageNumber + 1) % _imagesList.Count;
             ShowNextImage(imageBackground);
         }
 
@@ -482,7 +482,7 @@ namespace FrontendWPF.Windows
             // Add a key frame to the animation.
             // It should be at time 0 after the animation begins.
             DiscreteObjectKeyFrame new_image_frame =
-                new DiscreteObjectKeyFrame(imagesList[imageNumber], TimeSpan.Zero);
+                new DiscreteObjectKeyFrame(_imagesList[imageNumber], TimeSpan.Zero);
             new_image_animation.KeyFrames.Add(new_image_frame);
 
             // Use the Storyboard to set the target property.
