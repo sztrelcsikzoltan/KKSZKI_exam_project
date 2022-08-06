@@ -38,12 +38,18 @@ namespace FrontendWPF.Windows
             Shared.screenHeight = System.Windows.SystemParameters.WorkArea.Height;
 
             // Initialize the dummy (grouped) columns that are created during docking:
-            _colOneCopyForLayer0 = new ColumnDefinition();
-            _colOneCopyForLayer0.SharedSizeGroup = "column1";
-            _colTwoCopyForLayer0 = new ColumnDefinition();
-            _colTwoCopyForLayer0.SharedSizeGroup = "column2";
-            _colTwoCopyForLayer1 = new ColumnDefinition();
-            _colTwoCopyForLayer1.SharedSizeGroup = "column2";
+            _colOneCopyForLayer0 = new ColumnDefinition
+            {
+                SharedSizeGroup = "column1"
+            };
+            _colTwoCopyForLayer0 = new ColumnDefinition
+            {
+                SharedSizeGroup = "column2"
+            };
+            _colTwoCopyForLayer1 = new ColumnDefinition
+            {
+                SharedSizeGroup = "column2"
+            };
         }
 
         // Toggle panel 1 between docked and undocked states
