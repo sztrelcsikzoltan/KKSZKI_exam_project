@@ -465,8 +465,10 @@ namespace FrontendWPF.Windows
             // Animate Opacity 1.0 --> 0.0
             // ***************************
             DoubleAnimation fade_out = new DoubleAnimation(1.0, 0.0,
-                TimeSpan.FromSeconds(transition_time));
-            fade_out.BeginTime = TimeSpan.FromSeconds(0);
+                TimeSpan.FromSeconds(transition_time))
+            {
+                BeginTime = TimeSpan.FromSeconds(0)
+            };
 
             // Use the Storyboard to set the target property.
             Storyboard.SetTarget(fade_out, img);
@@ -481,9 +483,11 @@ namespace FrontendWPF.Windows
             // Animate displaying the new image.
             // *********************************
             ObjectAnimationUsingKeyFrames new_image_animation =
-                new ObjectAnimationUsingKeyFrames();
-            // Start after the first animation has finisheed.
-            new_image_animation.BeginTime = TimeSpan.FromSeconds(transition_time);
+                new ObjectAnimationUsingKeyFrames
+                {
+                    // Start after the first animation has finished.
+                    BeginTime = TimeSpan.FromSeconds(transition_time)
+                };
 
             // Add a key frame to the animation.
             // It should be at time 0 after the animation begins.
@@ -505,8 +509,10 @@ namespace FrontendWPF.Windows
             // ***************************
             // Start when the first animation ends.
             DoubleAnimation fade_in = new DoubleAnimation(0.0, 1.0,
-                TimeSpan.FromSeconds(transition_time));
-            fade_in.BeginTime = TimeSpan.FromSeconds(transition_time);
+                TimeSpan.FromSeconds(transition_time))
+            {
+                BeginTime = TimeSpan.FromSeconds(transition_time)
+            };
 
             // Use the Storyboard to set the target property.
             Storyboard.SetTarget(fade_in, img);
