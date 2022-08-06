@@ -53,7 +53,7 @@ namespace FrontendWPF.Windows
         }
 
         // Toggle panel 1 between docked and undocked states
-        public void panel1Pin_Click(object sender, RoutedEventArgs e)
+        public void Panel1Pin_Click(object sender, RoutedEventArgs e)
         {
             if (button_panel1.Visibility == Visibility.Collapsed)
                 UndockPane(1);
@@ -62,7 +62,7 @@ namespace FrontendWPF.Windows
         }
 
         // Toggle panel 2 between docked and undocked states 
-        public void panel2Pin_Click(object sender, RoutedEventArgs e)
+        public void Panel2Pin_Click(object sender, RoutedEventArgs e)
         {
             if (button_panel2.Visibility == Visibility.Collapsed)
                 UndockPane(2);
@@ -71,7 +71,7 @@ namespace FrontendWPF.Windows
         }
 
         // Make panel 1 visible when hovering over its button
-        public void button_panel1_MouseEnter(object sender, RoutedEventArgs e)
+        public void Button_panel1_MouseEnter(object sender, RoutedEventArgs e)
         {
             gridlayer1.Visibility = Visibility.Visible;
 
@@ -85,7 +85,7 @@ namespace FrontendWPF.Windows
         }
 
         // Make panel 2 visible when hovering over its button
-        public void button_panel2_MouseEnter(object sender, RoutedEventArgs e)
+        public void Button_panel2_MouseEnter(object sender, RoutedEventArgs e)
         {
             gridlayer2.Visibility = Visibility.Visible;
 
@@ -99,7 +99,7 @@ namespace FrontendWPF.Windows
         }
 
         // Hide any undocked panes when the mouse enters Layer 0
-        public void layer0_MouseEnter(object sender, RoutedEventArgs e)
+        public void Layer0_MouseEnter(object sender, RoutedEventArgs e)
         {
             if (button_panel1.Visibility == Visibility.Visible)
                 gridlayer1.Visibility = Visibility.Collapsed;
@@ -108,7 +108,7 @@ namespace FrontendWPF.Windows
         }
 
         // Hide the other pane if undocked when the mouse enters Panel 1
-        public void panel1_MouseEnter(object sender, RoutedEventArgs e)
+        public void Panel1_MouseEnter(object sender, RoutedEventArgs e)
         {
             // Ensure the other pane is hidden if it is undocked
             if (button_panel2.Visibility == Visibility.Visible)
@@ -116,7 +116,7 @@ namespace FrontendWPF.Windows
         }
 
         // Hide the other pane if undocked when the mouse enters Panel 2
-        public void panel2_MouseEnter(object sender, RoutedEventArgs e)
+        public void Panel2_MouseEnter(object sender, RoutedEventArgs e)
         {
             // Ensure the other pane is hidden if it is undocked
             if (button_panel1.Visibility == Visibility.Visible)
@@ -258,7 +258,7 @@ namespace FrontendWPF.Windows
         }
 
         private ManageUsersWindow _manageUsersWindow;
-        private void button_ManageUsersWindow_Click(object sender, RoutedEventArgs e)
+        private void Button_ManageUsersWindow_Click(object sender, RoutedEventArgs e)
         {
             Shared.layout = "";
             // show only if not open already (to avoid multiple instances)
@@ -270,7 +270,7 @@ namespace FrontendWPF.Windows
         }
 
         private ManageProductsWindow _manageProductsWindow;
-        private void button_ManageProductsWindow_Click(object sender, RoutedEventArgs e)
+        private void Button_ManageProductsWindow_Click(object sender, RoutedEventArgs e)
         {
             Shared.layout = "";
             // show only if not open already (to avoid multiple instances)
@@ -282,7 +282,7 @@ namespace FrontendWPF.Windows
         }
 
         ManagePurchasesWindow _managePurchasesWindow;
-        private void button_ManagePurchasesWindow_Click(object sender, RoutedEventArgs e)
+        private void Button_ManagePurchasesWindow_Click(object sender, RoutedEventArgs e)
         {
             Shared.layout = "";
             // show only if not open already (to avoid multiple instances)
@@ -294,7 +294,7 @@ namespace FrontendWPF.Windows
         }
 
         private ManageSalesWindow _manageSalesWindow;
-        private void button_ManageSalesWindow_Click(object sender, RoutedEventArgs e)
+        private void Button_ManageSalesWindow_Click(object sender, RoutedEventArgs e)
         {
             Shared.layout = "";
             // show only if not open already (to avoid multiple instances)
@@ -306,7 +306,7 @@ namespace FrontendWPF.Windows
         }
 
         private ManageStocksWindow _manageStocksWindow;
-        private void button_ManageStocksWindow_Click(object sender, RoutedEventArgs e)
+        private void Button_ManageStocksWindow_Click(object sender, RoutedEventArgs e)
         {
             // show only if not open already (to avoid multiple instances)
             if (!Application.Current.Windows.OfType<Window>().Contains(_manageStocksWindow))
@@ -317,7 +317,7 @@ namespace FrontendWPF.Windows
         }
 
         private ManageLocationsWindow _manageLocationsWindow;
-        private void button_ManageLocationsWindow_Click(object sender, RoutedEventArgs e)
+        private void Button_ManageLocationsWindow_Click(object sender, RoutedEventArgs e)
         {
             Shared.layout = "";
             // show only if not open already (to avoid multiple instances)
@@ -328,7 +328,7 @@ namespace FrontendWPF.Windows
             }
         }
 
-         private void button_Exit_Click(object sender, RoutedEventArgs e)
+         private void Button_Exit_Click(object sender, RoutedEventArgs e)
         {
             CloseWindow();
         }
@@ -409,7 +409,7 @@ namespace FrontendWPF.Windows
             }
         }
 
-        private void button_Layouts_Click(object sender, RoutedEventArgs e)
+        private void Button_Layouts_Click(object sender, RoutedEventArgs e)
         {
             if (gridLayout.Visibility == Visibility.Hidden)
             {
@@ -520,7 +520,7 @@ namespace FrontendWPF.Windows
             sb.Begin(img);
         }
 
-        private void button_OpenNotes_Click(object sender, RoutedEventArgs e)
+        private void Button_OpenNotes_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog()
             {
@@ -544,7 +544,7 @@ namespace FrontendWPF.Windows
                 */
             }
         }
-        private void button_SaveNotes_Click(object sender, RoutedEventArgs e)
+        private void Button_SaveNotes_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog()
             {
@@ -569,17 +569,17 @@ namespace FrontendWPF.Windows
                 richTextBox.Selection.Save(new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write), (filter == 1 ? DataFormats.Text : DataFormats.Rtf));
                 button_SaveNotes.Content = "File saved";
                 button_SaveNotes.IsEnabled = false;
-                richTextBox.TextChanged += new TextChangedEventHandler(richTextBox_TextChanged);
+                richTextBox.TextChanged += new TextChangedEventHandler(RichTextBox_TextChanged);
             }
         }
 
-        private void richTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void RichTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (button_SaveNotes.Content.ToString() == "File saved")
             {
                 button_SaveNotes.Content = "Save notes";
                 button_SaveNotes.IsEnabled = true;
-                richTextBox.TextChanged -= new TextChangedEventHandler(richTextBox_TextChanged);
+                richTextBox.TextChanged -= new TextChangedEventHandler(RichTextBox_TextChanged);
             }
         }
 

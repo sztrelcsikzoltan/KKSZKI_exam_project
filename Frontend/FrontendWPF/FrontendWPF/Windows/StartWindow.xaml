@@ -80,11 +80,11 @@
                 <RotateTransform Angle="90" />
             </StackPanel.LayoutTransform>
 
-            <Button Name="button_panel1" MouseEnter="button_panel1_MouseEnter" Margin="0,0,10,0" Padding="10,1,10,1" Background="#FF8E52F7" Width="75" Height="30">
+            <Button Name="button_panel1" MouseEnter="Button_panel1_MouseEnter" Margin="0,0,10,0" Padding="10,1,10,1" Background="#FF8E52F7" Width="75" Height="30">
                 Notepad
             </Button>
 
-            <Button Name="button_panel2" MouseEnter="button_panel2_MouseEnter" Padding="10,1,10,1" Background="#FF8E52F7" Width="75" Height="30">
+            <Button Name="button_panel2" MouseEnter="Button_panel2_MouseEnter" Padding="10,1,10,1" Background="#FF8E52F7" Width="75" Height="30">
                 Settings 
             </Button>
         </StackPanel>
@@ -94,7 +94,7 @@
 
         <Grid Name="parentGrid" Grid.IsSharedSizeScope="True">
 
-            <Grid Name="layer0" MouseEnter="layer0_MouseEnter">
+            <Grid Name="layer0" MouseEnter="Layer0_MouseEnter">
 
                 <Grid.RowDefinitions>
                     <RowDefinition />
@@ -122,14 +122,14 @@
                 <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Margin="5 0 0 0">
 
                     <Button Name="button_login" Content="LOGIN" Width="140" Height="40" Margin="0,20,0,0" FontWeight="SemiBold" Foreground="LightSalmon" ToolTip="Login to the application" Click="Button_login_Click" ToolTipService.ShowOnDisabled="True"/>
-                    <Button Name="button_ManageUsersWindow" Content="Manage users" Width="140" Height="40" Margin="0,10,0,0" IsEnabled="False" Foreground="#FF9D9D9D" ToolTip="Manage users from the database..." Click="button_ManageUsersWindow_Click" ToolTipService.ShowOnDisabled="True"/>
-                    <Button Name="button_ManageProductsWindow" Content="Manage products" Width="140" Height="40" Margin="0,10,0,0" IsEnabled="False" Foreground="#FF989898" ToolTip="Manage products from the database..." Click="button_ManageProductsWindow_Click" ToolTipService.ShowOnDisabled="True"/>
-                    <Button Name="button_ManagePurchasesWindow" Content="Manage purchases" Width="140" Height="40" Margin="0,10,0,0" IsEnabled="False" Foreground="#FF989898" ToolTip="Manage purchases from the database..." Click="button_ManagePurchasesWindow_Click" ToolTipService.ShowOnDisabled="True"/>
-                    <Button Name="button_ManageSalesWindow" Content="Manage sales" Width="140" Height="40" Margin="0,10,0,0" IsEnabled="False" Foreground="#FF8C8C8C" ToolTip="Manage sales from the database..." Click="button_ManageSalesWindow_Click" ToolTipService.ShowOnDisabled="True"/>
-                    <Button Name="button_ManageStocksWindow" Content="Manage stocks" Width="140" Height="40" Margin="0,10,0,0" IsEnabled="False" Foreground="#FF868686" ToolTip="Manage stocks from the database..." Click="button_ManageStocksWindow_Click" ToolTipService.ShowOnDisabled="True"/>
-                    <Button Name="button_ManageLocationsWindow" Content="Manage locations" Width="140" Height="40" Margin="0,10,0,0" IsEnabled="False" Foreground="Gray" ToolTip="Manage locations..." Click="button_ManageLocationsWindow_Click" ToolTipService.ShowOnDisabled="True"/>
-                    <Button Name="button_Layouts" Content="Show layouts" Width="140" Height="40" Margin="0,10,0,0" IsEnabled="False" Foreground="Gray" ToolTip="View layouts..." Click="button_Layouts_Click"  ToolTipService.ShowOnDisabled="True"/>
-                    <Button Name="button_Exit" Content="Exit" Width="140" Height="40" Margin="0,10,0,0" Foreground="White" ToolTip="Exit application..." Click="button_Exit_Click" ToolTipService.ShowOnDisabled="True"/>
+                    <Button Name="button_ManageUsersWindow" Content="Manage users" Width="140" Height="40" Margin="0,10,0,0" IsEnabled="False" Foreground="#FF9D9D9D" ToolTip="Manage users from the database..." Click="Button_ManageUsersWindow_Click" ToolTipService.ShowOnDisabled="True"/>
+                    <Button Name="button_ManageProductsWindow" Content="Manage products" Width="140" Height="40" Margin="0,10,0,0" IsEnabled="False" Foreground="#FF989898" ToolTip="Manage products from the database..." Click="Button_ManageProductsWindow_Click" ToolTipService.ShowOnDisabled="True"/>
+                    <Button Name="button_ManagePurchasesWindow" Content="Manage purchases" Width="140" Height="40" Margin="0,10,0,0" IsEnabled="False" Foreground="#FF989898" ToolTip="Manage purchases from the database..." Click="Button_ManagePurchasesWindow_Click" ToolTipService.ShowOnDisabled="True"/>
+                    <Button Name="button_ManageSalesWindow" Content="Manage sales" Width="140" Height="40" Margin="0,10,0,0" IsEnabled="False" Foreground="#FF8C8C8C" ToolTip="Manage sales from the database..." Click="Button_ManageSalesWindow_Click" ToolTipService.ShowOnDisabled="True"/>
+                    <Button Name="button_ManageStocksWindow" Content="Manage stocks" Width="140" Height="40" Margin="0,10,0,0" IsEnabled="False" Foreground="#FF868686" ToolTip="Manage stocks from the database..." Click="Button_ManageStocksWindow_Click" ToolTipService.ShowOnDisabled="True"/>
+                    <Button Name="button_ManageLocationsWindow" Content="Manage locations" Width="140" Height="40" Margin="0,10,0,0" IsEnabled="False" Foreground="Gray" ToolTip="Manage locations..." Click="Button_ManageLocationsWindow_Click" ToolTipService.ShowOnDisabled="True"/>
+                    <Button Name="button_Layouts" Content="Show layouts" Width="140" Height="40" Margin="0,10,0,0" IsEnabled="False" Foreground="Gray" ToolTip="View layouts..." Click="Button_Layouts_Click"  ToolTipService.ShowOnDisabled="True"/>
+                    <Button Name="button_Exit" Content="Exit" Width="140" Height="40" Margin="0,10,0,0" Foreground="White" ToolTip="Exit application..." Click="Button_Exit_Click" ToolTipService.ShowOnDisabled="True"/>
 
                 </StackPanel>
 
@@ -181,7 +181,7 @@
                 </Grid.ColumnDefinitions>
 
 
-                <Grid Grid.Column="1" MouseEnter="panel1_MouseEnter" Background="LightBlue">
+                <Grid Grid.Column="1" MouseEnter="Panel1_MouseEnter" Background="LightBlue">
 
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
@@ -190,12 +190,12 @@
 
                     <DockPanel Grid.Row="0" Background="LightSteelBlue">
                         
-                        <Button Width="30" Height="30" Name="panel1Pin" DockPanel.Dock="Right" Click="panel1Pin_Click" Background="White" Padding="3">
+                        <Button Width="30" Height="30" Name="panel1Pin" DockPanel.Dock="Right" Click="Panel1Pin_Click" Background="White" Padding="3">
                             <Image Name="panel1PinImg" Source="pack://application:,,,/Resources/Images/PinHor1col.png" />
                         </Button>
-                        <Button Name="button_SaveNotes" Click="button_SaveNotes_Click" Content="Save notes" Width="90" Height="30" DockPanel.Dock="Right" Margin="0,0,10,0" Padding="10,1,10,1" Background="#FF8E52F7">
+                        <Button Name="button_SaveNotes" Click="Button_SaveNotes_Click" Content="Save notes" Width="90" Height="30" DockPanel.Dock="Right" Margin="0,0,10,0" Padding="10,1,10,1" Background="#FF8E52F7">
                         </Button>
-                        <Button Name="button_OpenNotes" Click="button_OpenNotes_Click" Content="Open notes" Width="90" Height="30" DockPanel.Dock="Right" Margin="0,0,10,0" Padding="10,1,10,1" Background="#FF8E52F7">
+                        <Button Name="button_OpenNotes" Click="Button_OpenNotes_Click" Content="Open notes" Width="90" Height="30" DockPanel.Dock="Right" Margin="0,0,10,0" Padding="10,1,10,1" Background="#FF8E52F7">
                         </Button>
                         <!-- How to use the Extended WPF toolkit: https://github.com/xceedsoftware/wpftoolkit  → https://youtu.be/ZyVeTO3AgR8 -->
                         <xctk:ColorPicker Name="colorPickerFont" DockPanel.Dock="Right" SelectedColorChanged="ColorPicker_SelectedColorChanged" SelectedColor="LightSteelBlue" ToolTip="Pic font color for selected text"/>
@@ -232,7 +232,7 @@
                     <ColumnDefinition SharedSizeGroup="column2" Width="auto" />
                 </Grid.ColumnDefinitions>
 
-                <Grid Grid.Column="1" MouseEnter="panel2_MouseEnter" Background="LightBlue">
+                <Grid Grid.Column="1" MouseEnter="Panel2_MouseEnter" Background="LightBlue">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
                         <RowDefinition Height="auto" />
@@ -241,7 +241,7 @@
 
                     <DockPanel Grid.Row="0" Background="LightSteelBlue">
 
-                        <Button Width="30" Height="30" Name="panel2Pin" DockPanel.Dock="Right" Click="panel2Pin_Click" Background="White" Padding="3">
+                        <Button Width="30" Height="30" Name="panel2Pin" DockPanel.Dock="Right" Click="Panel2Pin_Click" Background="White" Padding="3">
                             <Image Name="panel2PinImg" Source="pack://application:,,,/Resources/Images/PinHor1col.png"/>
                         </Button>
 
