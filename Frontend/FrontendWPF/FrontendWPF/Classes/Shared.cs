@@ -64,7 +64,7 @@ namespace FrontendWPF.Classes
         {
             // int itemsCount = dataGrid.Items.Count;
             // cannot recognizes rows (items) that are not visible (and results in error)!!
-            DataGridRow row = dataGrid.ItemContainerGenerator.ContainerFromItem(dataGrid.Items[row_index]) as DataGridRow;
+            DataGridRow row = (DataGridRow)dataGrid.ItemContainerGenerator.ContainerFromItem(dataGrid.Items[row_index]);
             if (row == null)
             {
                 return;
