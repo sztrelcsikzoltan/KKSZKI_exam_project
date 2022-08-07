@@ -178,7 +178,7 @@ namespace FrontendWPF.Windows
         private LoginWindow loginWindow = new LoginWindow();
         private void Button_login_Click(object sender, RoutedEventArgs e)
         {
-            // open loginwindow if it logRegWindowsClosed and user not logged in    
+            // open loginWindow if loginWindow is closed and user is not logged in    
             if (loginWindow.IsLoaded == false && button_login.Content.ToString() == "LOGIN")
             {
                 loginWindow = new LoginWindow();
