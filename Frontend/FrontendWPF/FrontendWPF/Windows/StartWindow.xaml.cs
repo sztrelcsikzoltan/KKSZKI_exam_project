@@ -28,7 +28,7 @@ namespace FrontendWPF.Windows
 
         private readonly List<BitmapImage> _imagesList = new List<BitmapImage>();
         private int _imageNumber = 0;
-        public DispatcherTimer pictureTimer = new DispatcherTimer();
+        public DispatcherTimer PictureTimer = new DispatcherTimer();
 
         public StartWindow()
         {
@@ -183,7 +183,7 @@ namespace FrontendWPF.Windows
             {
                 loginWindow = new LoginWindow();
                 loginWindow.Show();
-                pictureTimer.Stop();
+                PictureTimer.Stop();
             }
             else // LOGOUT
             {
@@ -213,7 +213,7 @@ namespace FrontendWPF.Windows
                     imageBackground.Visibility = Visibility.Visible;
                 }
 
-                pictureTimer.Start();
+                PictureTimer.Start();
 
 
                 UserService.UserServiceClient client = new UserService.UserServiceClient();
@@ -444,9 +444,9 @@ namespace FrontendWPF.Windows
             imageBackground.Source = _imagesList[0];
 
             // Install a timer to show each image.
-            pictureTimer.Interval = TimeSpan.FromSeconds(5);
-            pictureTimer.Tick += Tick;
-            pictureTimer.Start();
+            PictureTimer.Interval = TimeSpan.FromSeconds(5);
+            PictureTimer.Tick += Tick;
+            PictureTimer.Start();
         }
 
         // Display the next image.

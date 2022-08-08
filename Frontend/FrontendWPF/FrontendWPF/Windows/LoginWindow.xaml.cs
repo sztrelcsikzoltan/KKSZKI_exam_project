@@ -169,7 +169,7 @@ namespace FrontendWPF.Windows
             Close();
             if (Shared.loggedIn == false)
             {
-                Shared.StartWindow.pictureTimer.Start();
+                Shared.StartWindow.PictureTimer.Start();
             }
         }
 
