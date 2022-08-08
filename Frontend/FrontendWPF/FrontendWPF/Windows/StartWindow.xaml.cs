@@ -27,7 +27,7 @@ namespace FrontendWPF.Windows
         private bool _closeCompleted = false;
 
         private readonly List<BitmapImage> _imagesList = new List<BitmapImage>();
-        private int imageNumber = 0;
+        private int _imageNumber = 0;
         public DispatcherTimer pictureTimer = new DispatcherTimer();
 
         public StartWindow()
@@ -452,7 +452,7 @@ namespace FrontendWPF.Windows
         // Display the next image.
         private void Tick(object sender, System.EventArgs e)
         {
-            imageNumber = (imageNumber + 1) % _imagesList.Count;
+            _imageNumber = (_imageNumber + 1) % _imagesList.Count;
             ShowNextImage(imageBackground);
         }
 
@@ -492,7 +492,7 @@ namespace FrontendWPF.Windows
             // Add a key frame to the animation.
             // It should be at time 0 after the animation begins.
             DiscreteObjectKeyFrame new_image_frame =
-                new DiscreteObjectKeyFrame(_imagesList[imageNumber], TimeSpan.Zero);
+                new DiscreteObjectKeyFrame(_imagesList[_imageNumber], TimeSpan.Zero);
             new_image_animation.KeyFrames.Add(new_image_frame);
 
             // Use the Storyboard to set the target property.
