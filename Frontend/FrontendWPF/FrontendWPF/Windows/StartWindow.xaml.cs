@@ -584,7 +584,8 @@ namespace FrontendWPF.Windows
             {
                 // https://stackoverflow.com/questions/11874800/change-style-of-selected-text-in-richtextbox
                 TextSelection ts = richTextBox.Selection;
-                if (ts.Text != "")
+                
+                if (ts.Text != "" && colorPickerFont.SelectedColor != null)  // SelectedColor should be never null, but added this condition to suppress hint "Possible 'System.InvalidOperationException'"
                     ts.ApplyPropertyValue(ForegroundProperty, new SolidColorBrush((Color)colorPickerFont.SelectedColor));
             }
         }
