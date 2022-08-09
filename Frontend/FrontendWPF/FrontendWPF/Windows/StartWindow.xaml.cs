@@ -212,12 +212,10 @@ namespace FrontendWPF.Windows
                     button_Layouts.Content = "Show layouts";
                     imageBackground.Visibility = Visibility.Visible;
                 }
-
+                
                 PictureTimer.Start();
 
-
                 UserService.UserServiceClient client = new UserService.UserServiceClient();
-                
                 try
                 {
                     string responseLogout = client.LogoutUser(Shared.uid);
@@ -231,7 +229,6 @@ namespace FrontendWPF.Windows
                     {
                         errorMessage = responseLogout;
                     }
-
                     if (errorMessage != "")
                     {
                         MessageBox.Show(errorMessage, caption: "Error message");
@@ -250,11 +247,8 @@ namespace FrontendWPF.Windows
                         MessageBox.Show($"Logout failed! The details of the error are the following:\n{ex.Message}", caption: "Error message");
                         return;
                     }
-
                 }
-
             }
-
         }
 
         private ManageUsersWindow _manageUsersWindow;
@@ -332,7 +326,6 @@ namespace FrontendWPF.Windows
         {
             CloseWindow();
         }
-
 
         private void CloseWindow()
         {
@@ -423,7 +416,6 @@ namespace FrontendWPF.Windows
                 button_Layouts.Content = "Show layouts";
                 imageBackground.Visibility = Visibility.Visible;
             }
-            
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -504,9 +496,7 @@ namespace FrontendWPF.Windows
             sb.Children.Add(new_image_animation);
 
 
-            // ***************************
             // Animate Opacity 0.0 --> 1.0
-            // ***************************
             // Start when the first animation ends.
             DoubleAnimation fade_in = new DoubleAnimation(0.0, 1.0,
                 TimeSpan.FromSeconds(transition_time))
@@ -546,7 +536,6 @@ namespace FrontendWPF.Windows
                 /*
                 StreamReader sr = new StreamReader(openFileDialog.FileName, Encoding.UTF8);
                 string fileContent = sr.ReadToEnd();
-
                 */
             }
         }
