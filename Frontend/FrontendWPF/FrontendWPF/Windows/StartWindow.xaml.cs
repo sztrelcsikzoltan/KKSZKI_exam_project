@@ -212,7 +212,7 @@ namespace FrontendWPF.Windows
                     button_Layouts.Content = "Show layouts";
                     imageBackground.Visibility = Visibility.Visible;
                 }
-                
+
                 PictureTimer.Start();
 
                 UserService.UserServiceClient client = new UserService.UserServiceClient();
@@ -322,7 +322,7 @@ namespace FrontendWPF.Windows
             }
         }
 
-         private void Button_Exit_Click(object sender, RoutedEventArgs e)
+        private void Button_Exit_Click(object sender, RoutedEventArgs e)
         {
             CloseWindow();
         }
@@ -373,7 +373,7 @@ namespace FrontendWPF.Windows
                 _manageProductsWindow = new ManageProductsWindow();
                 if (_manageProductsWindow.IsEnabled) _manageProductsWindow.Show();
             }
-            if(buttonName.Contains("Purchases") && !Application.Current.Windows.OfType<Window>().Contains(_managePurchasesWindow))
+            if (buttonName.Contains("Purchases") && !Application.Current.Windows.OfType<Window>().Contains(_managePurchasesWindow))
             {
                 _managePurchasesWindow = new ManagePurchasesWindow();
                 if (_managePurchasesWindow.IsEnabled) _managePurchasesWindow.Show();
@@ -575,7 +575,7 @@ namespace FrontendWPF.Windows
                 button_SaveNotes.Content = "Save notes";
                 button_SaveNotes.IsEnabled = true;
                 richTextBox.TextChanged -= new TextChangedEventHandler(RichTextBox_TextChanged);
-            }
+            } 
         }
 
         private void ColorPicker_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
@@ -584,8 +584,8 @@ namespace FrontendWPF.Windows
             {
                 // https://stackoverflow.com/questions/11874800/change-style-of-selected-text-in-richtextbox
                 TextSelection ts = richTextBox.Selection;
-                if(ts != null)
-                ts.ApplyPropertyValue(ForegroundProperty, new SolidColorBrush((Color)colorPickerFont.SelectedColor));
+                if (ts.Text != "")
+                    ts.ApplyPropertyValue(ForegroundProperty, new SolidColorBrush((Color)colorPickerFont.SelectedColor));
             }
         }
     }
