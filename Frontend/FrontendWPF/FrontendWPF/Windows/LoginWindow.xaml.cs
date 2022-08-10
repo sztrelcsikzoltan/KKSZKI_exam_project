@@ -169,7 +169,7 @@ namespace FrontendWPF.Windows
             Close();
             if (Shared.loggedIn == false)
             {
-                Shared.StartWindow.PictureTimer.Start();
+                Shared.StartWindow.PictureTimer.Start(); // start slideshow if user is logged out
             }
         }
 

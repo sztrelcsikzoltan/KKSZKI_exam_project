@@ -183,7 +183,7 @@ namespace FrontendWPF.Windows
             {
                 loginWindow = new LoginWindow();
                 loginWindow.Show();
-                PictureTimer.Stop();
+                PictureTimer.Stop(); // stop slideshow if user is logged in
             }
             else // LOGOUT
             {
