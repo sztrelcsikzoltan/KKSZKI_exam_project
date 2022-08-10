@@ -213,7 +213,7 @@ namespace FrontendWPF.Windows
                     imageBackground.Visibility = Visibility.Visible;
                 }
 
-                PictureTimer.Start();
+                PictureTimer.Start(); // start slideshow if user is logged out
 
                 UserService.UserServiceClient client = new UserService.UserServiceClient();
                 try
