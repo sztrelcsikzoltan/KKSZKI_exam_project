@@ -209,7 +209,7 @@ namespace FrontendWPF.Windows
             Button_Close.IsEnabled = true;
         }
 
-        private void textBlock_ShowPassword_Click(object sender, MouseButtonEventArgs e)
+        private void TextBlockShowPasswordClick(object sender, MouseButtonEventArgs e)
         {
             textBox_showPassword.Text = PasswordBox_Password.Password;
             
@@ -218,7 +218,7 @@ namespace FrontendWPF.Windows
             textBlock_showPassword.Visibility = Visibility.Collapsed;
             textBlock_hidePassword.Visibility = Visibility.Visible;
         }
-        private void textBlock_HidePassword_Click(object sender, MouseButtonEventArgs e)
+        private void TextBlockHidePasswordClick(object sender, MouseButtonEventArgs e)
         {
             PasswordBox_Password.Password = textBox_showPassword.Text;
             textBox_showPassword.Visibility = Visibility.Collapsed;

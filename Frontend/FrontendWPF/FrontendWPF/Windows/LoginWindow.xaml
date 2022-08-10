@@ -149,8 +149,8 @@
                              Height="25"
                              Margin="63,0,0,0"
                         />
-                    <TextBlock Name="textBlock_showPassword" Text="&#xf06e;" FontFamily="{StaticResource FontAwesome}" Foreground="LightSalmon" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Center" PreviewMouseDown="textBlock_ShowPassword_Click" Cursor="Hand"></TextBlock>
-                    <TextBlock Name="textBlock_hidePassword" Text="&#xf023;" FontFamily="{StaticResource FontAwesome}" Foreground="LightSalmon" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Center" PreviewMouseDown="textBlock_HidePassword_Click" Cursor="Hand" Visibility="Collapsed" Margin="2,0,0,0"></TextBlock>
+                    <TextBlock Name="textBlock_showPassword" Text="&#xf06e;" FontFamily="{StaticResource FontAwesome}" Foreground="LightSalmon" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Center" PreviewMouseDown="TextBlockShowPasswordClick" Cursor="Hand"></TextBlock>
+                    <TextBlock Name="textBlock_hidePassword" Text="&#xf023;" FontFamily="{StaticResource FontAwesome}" Foreground="LightSalmon" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Center" PreviewMouseDown="TextBlockHidePasswordClick" Cursor="Hand" Visibility="Collapsed" Margin="2,0,0,0"></TextBlock>
 
 
 
