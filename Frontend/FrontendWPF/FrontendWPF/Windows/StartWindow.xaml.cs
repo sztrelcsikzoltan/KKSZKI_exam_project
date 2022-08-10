@@ -179,7 +179,7 @@ namespace FrontendWPF.Windows
         private void Button_login_Click(object sender, RoutedEventArgs e)
         {
             // open loginWindow if loginWindow is closed and user is not logged in    
-            if (loginWindow.IsLoaded == false && button_login.Content.ToString() == "LOGIN")
+            if (loginWindow.IsLoaded == false && Shared.loggedIn == false)
             {
                 loginWindow = new LoginWindow();
                 loginWindow.Show();
