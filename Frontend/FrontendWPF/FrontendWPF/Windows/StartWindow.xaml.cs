@@ -99,7 +99,7 @@ namespace FrontendWPF.Windows
         }
 
         // Hide any undocked panes when the mouse enters Layer 0
-        public void Layer0_MouseEnter(object sender, RoutedEventArgs e)
+        public void GridLayer0_MouseEnter(object sender, RoutedEventArgs e)
         {
             if (button_panel1.Visibility == Visibility.Visible)
                 gridLayer1.Visibility = Visibility.Collapsed;

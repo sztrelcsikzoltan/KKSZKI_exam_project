@@ -94,7 +94,7 @@
 
         <Grid Name="parentGrid" Grid.IsSharedSizeScope="True">
 
-            <Grid Name="gridLayer0" MouseEnter="Layer0_MouseEnter">
+            <Grid Name="gridLayer0" MouseEnter="GridLayer0_MouseEnter">
 
                 <Grid.RowDefinitions>
                     <RowDefinition />
