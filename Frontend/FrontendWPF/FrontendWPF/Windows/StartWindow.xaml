@@ -94,7 +94,7 @@
 
         <Grid Name="parentGrid" Grid.IsSharedSizeScope="True">
 
-            <Grid Name="layer0" MouseEnter="Layer0_MouseEnter">
+            <Grid Name="gridLayer0" MouseEnter="Layer0_MouseEnter">
 
                 <Grid.RowDefinitions>
                     <RowDefinition />
@@ -174,7 +174,7 @@
 
             <!--For panel1 dock window-->
             <!--This grid is the panel that appears for Button One-->
-            <Grid Name="gridlayer1" Visibility="Collapsed">
+            <Grid Name="gridLayer1" Visibility="Collapsed">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition SharedSizeGroup="column1" Width="auto" />

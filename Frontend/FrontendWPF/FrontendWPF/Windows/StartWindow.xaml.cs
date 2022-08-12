@@ -73,11 +73,11 @@ namespace FrontendWPF.Windows
         // Make panel 1 visible when hovering over its button
         public void Button_panel1_MouseEnter(object sender, RoutedEventArgs e)
         {
-            gridlayer1.Visibility = Visibility.Visible;
+            gridLayer1.Visibility = Visibility.Visible;
 
             // Adjust ZIndex order to ensure the pane is on top:
-            parentGrid.Children.Remove(gridlayer1);
-            parentGrid.Children.Add(gridlayer1);
+            parentGrid.Children.Remove(gridLayer1);
+            parentGrid.Children.Add(gridLayer1);
 
             // Ensure the other pane is hidden if it is undocked
             if (button_panel2.Visibility == Visibility.Visible)
@@ -95,14 +95,14 @@ namespace FrontendWPF.Windows
 
             // Ensure the other pane is hidden if it is undocked
             if (button_panel1.Visibility == Visibility.Visible)
-                gridlayer1.Visibility = Visibility.Collapsed;
+                gridLayer1.Visibility = Visibility.Collapsed;
         }
 
         // Hide any undocked panes when the mouse enters Layer 0
         public void Layer0_MouseEnter(object sender, RoutedEventArgs e)
         {
             if (button_panel1.Visibility == Visibility.Visible)
-                gridlayer1.Visibility = Visibility.Collapsed;
+                gridLayer1.Visibility = Visibility.Collapsed;
             if (button_panel2.Visibility == Visibility.Visible)
                 gridlayer2.Visibility = Visibility.Collapsed;
         }
@@ -120,7 +120,7 @@ namespace FrontendWPF.Windows
         {
             // Ensure the other pane is hidden if it is undocked
             if (button_panel1.Visibility == Visibility.Visible)
-                gridlayer1.Visibility = Visibility.Collapsed;
+                gridLayer1.Visibility = Visibility.Collapsed;
         }
 
         // Docks a pane and hides its button
@@ -131,20 +131,20 @@ namespace FrontendWPF.Windows
                 button_panel1.Visibility = Visibility.Collapsed;
                 panel1PinImg.Source = new BitmapImage(new Uri("/Resources/Images/PinVer1col.png", UriKind.Relative));
 
-                // Add the cloned column to layer 0:
-                layer0.ColumnDefinitions.Add(_colOneCopyForLayer0);
+                // Add the cloned column to gridLayer0:
+                gridLayer0.ColumnDefinitions.Add(_colOneCopyForLayer0);
                 // Add the cloned column to layer 1, but only if pane 2 is docked:
-                if (button_panel2.Visibility == Visibility.Collapsed) gridlayer1.ColumnDefinitions.Add(_colTwoCopyForLayer1);
+                if (button_panel2.Visibility == Visibility.Collapsed) gridLayer1.ColumnDefinitions.Add(_colTwoCopyForLayer1);
             }
             else if (paneNumber == 2)
             {
                 button_panel2.Visibility = Visibility.Collapsed;
                 panel2PinImg.Source = new BitmapImage(new Uri("/Resources/Images/PinVer1col.png", UriKind.Relative));
 
-                // Add the cloned column to layer 0:
-                layer0.ColumnDefinitions.Add(_colTwoCopyForLayer0);
+                // Add the cloned column to gridLayer0:
+                gridLayer0.ColumnDefinitions.Add(_colTwoCopyForLayer0);
                 // Add the cloned column to layer 1, but only if pane 1 is docked:
-                if (button_panel1.Visibility == Visibility.Collapsed) gridlayer1.ColumnDefinitions.Add(_colTwoCopyForLayer1);
+                if (button_panel1.Visibility == Visibility.Collapsed) gridLayer1.ColumnDefinitions.Add(_colTwoCopyForLayer1);
             }
         }
 
@@ -153,14 +153,14 @@ namespace FrontendWPF.Windows
         {
             if (panelNbr == 1)
             {
-                gridlayer1.Visibility = Visibility.Collapsed;
+                gridLayer1.Visibility = Visibility.Collapsed;
                 button_panel1.Visibility = Visibility.Visible;
                 panel1PinImg.Source = new BitmapImage(new Uri("/Resources/Images/PinHor1col.png", UriKind.Relative));
 
-                // Remove the cloned columns from layers 0 and 1:
-                layer0.ColumnDefinitions.Remove(_colOneCopyForLayer0);
+                // Remove the cloned columns from gridLayers 0 and 1:
+                gridLayer0.ColumnDefinitions.Remove(_colOneCopyForLayer0);
                 // This won't always be present, but Remove silently ignores bad columns:
-                gridlayer1.ColumnDefinitions.Remove(_colTwoCopyForLayer1);
+                gridLayer1.ColumnDefinitions.Remove(_colTwoCopyForLayer1);
             }
             else if (panelNbr == 2)
             {
@@ -169,8 +169,8 @@ namespace FrontendWPF.Windows
                 panel2PinImg.Source = new BitmapImage(new Uri("/Resources/Images/PinHor1col.png", UriKind.Relative));
 
                 // Remove the cloned columns from layers 0 and 1:
-                layer0.ColumnDefinitions.Remove(_colTwoCopyForLayer0);
-                gridlayer1.ColumnDefinitions.Remove(_colTwoCopyForLayer1);
+                gridLayer0.ColumnDefinitions.Remove(_colTwoCopyForLayer0);
+                gridLayer1.ColumnDefinitions.Remove(_colTwoCopyForLayer1);
             }
         }
 
