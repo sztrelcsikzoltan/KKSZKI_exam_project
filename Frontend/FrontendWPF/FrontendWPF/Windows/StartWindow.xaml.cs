@@ -20,7 +20,7 @@ namespace FrontendWPF.Windows
     /// </summary>
     public partial class StartWindow : Window
     {
-        // Dummy columns for layers 0 and 1:
+        // Dummy columns for gridLayers 0 and 1:
         private readonly ColumnDefinition _colOneCopyForLayer0;
         private readonly ColumnDefinition _colTwoCopyForLayer0;
         private readonly ColumnDefinition _colTwoCopyForLayer1;
@@ -133,7 +133,7 @@ namespace FrontendWPF.Windows
 
                 // Add the cloned column to gridLayer0:
                 gridLayer0.ColumnDefinitions.Add(_colOneCopyForLayer0);
-                // Add the cloned column to layer 1, but only if pane 2 is docked:
+                // Add the cloned column to gridLayer 1, but only if pane 2 is docked:
                 if (button_panel2.Visibility == Visibility.Collapsed) gridLayer1.ColumnDefinitions.Add(_colTwoCopyForLayer1);
             }
             else if (paneNumber == 2)
@@ -143,7 +143,7 @@ namespace FrontendWPF.Windows
 
                 // Add the cloned column to gridLayer0:
                 gridLayer0.ColumnDefinitions.Add(_colTwoCopyForLayer0);
-                // Add the cloned column to layer 1, but only if pane 1 is docked:
+                // Add the cloned column to gridLayer 1, but only if pane 1 is docked:
                 if (button_panel1.Visibility == Visibility.Collapsed) gridLayer1.ColumnDefinitions.Add(_colTwoCopyForLayer1);
             }
         }
@@ -168,7 +168,7 @@ namespace FrontendWPF.Windows
                 button_panel2.Visibility = Visibility.Visible;
                 panel2PinImg.Source = new BitmapImage(new Uri("/Resources/Images/PinHor1col.png", UriKind.Relative));
 
-                // Remove the cloned columns from layers 0 and 1:
+                // Remove the cloned columns from gridLayers 0 and 1:
                 gridLayer0.ColumnDefinitions.Remove(_colTwoCopyForLayer0);
                 gridLayer1.ColumnDefinitions.Remove(_colTwoCopyForLayer1);
             }
