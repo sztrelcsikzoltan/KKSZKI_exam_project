@@ -589,5 +589,12 @@ namespace FrontendWPF.Windows
                     ts.ApplyPropertyValue(ForegroundProperty, new SolidColorBrush((Color)colorPickerFont.SelectedColor));
             }
         }
+
+        private void GridLayer1_OnSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            // do not allow to drag any of the columns to exceed the width of the gridLayer1 containing them 
+            Column1.MaxWidth = gridLayer1.ActualWidth - 10;
+            Column2.MaxWidth = gridLayer1.ActualWidth - 10;
+        }
     }
 }

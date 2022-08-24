@@ -174,7 +174,7 @@
 
             <!--For panel1 dock window-->
             <!--This grid is the panel that appears for Button One-->
-            <Grid Name="gridLayer1" Visibility="Collapsed">
+            <Grid Name="gridLayer1" Visibility="Collapsed" SizeChanged="GridLayer1_OnSizeChanged">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition Name="Column1" SharedSizeGroup="column1" Width="auto" />
