@@ -177,7 +177,7 @@
             <Grid Name="gridLayer1" Visibility="Collapsed" SizeChanged="GridLayer1_OnSizeChanged">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
-                    <ColumnDefinition Name="Column1" SharedSizeGroup="column1" Width="auto" MaxWidth="760" />
+                    <ColumnDefinition Name="Column1" SharedSizeGroup="column1" Width="auto" MaxWidth="760" MinWidth="456" />
                 </Grid.ColumnDefinitions>
 
 
@@ -229,7 +229,7 @@
             <Grid Name="gridlayer2" Visibility="Collapsed">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
-                    <ColumnDefinition Name="Column2" SharedSizeGroup="column2" Width="auto" MaxWidth="760" />
+                    <ColumnDefinition Name="Column2" SharedSizeGroup="column2" Width="auto" MaxWidth="760" MinWidth="162" />
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="1" MouseEnter="Panel2_MouseEnter" Background="LightBlue">
