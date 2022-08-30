@@ -134,7 +134,13 @@ namespace FrontendWPF.Windows
                 // Add the cloned column to gridLayer0:
                 gridLayer0.ColumnDefinitions.Add(_colOneCopyForLayer0);
                 // Add the cloned column to gridLayer 1, but only if pane 2 is docked:
-                if (button_panel2.Visibility == Visibility.Collapsed) gridLayer1.ColumnDefinitions.Add(_colTwoCopyForLayer1);
+                if (button_panel2.Visibility == Visibility.Collapsed)
+                {
+                    gridLayer1.ColumnDefinitions.Add(_colTwoCopyForLayer1);
+
+                    if (Column2.Width == GridLength.Auto) Column2.Width = new GridLength(Column2.MinWidth); // set Width to MinWidth if Width is auto to use its value below
+                    Column1.MaxWidth = gridLayer1.ActualWidth == 0 ? 770 : gridLayer1.ActualWidth - Column2.Width.Value + 20;
+                }
             }
             else if (paneNumber == 2)
             {
