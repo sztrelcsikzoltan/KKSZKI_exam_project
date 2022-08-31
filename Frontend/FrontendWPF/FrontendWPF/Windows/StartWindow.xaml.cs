@@ -140,6 +140,7 @@ namespace FrontendWPF.Windows
 
                     if (Column2.Width == GridLength.Auto) Column2.Width = new GridLength(Column2.MinWidth); // set Width to MinWidth if Width is auto to use its value below
                     Column1.MaxWidth = gridLayer1.ActualWidth == 0 ? 770 : gridLayer1.ActualWidth - Column2.Width.Value + 20;
+                    Column2.MaxWidth -= (Column1.ActualWidth > 0 ? Column1.ActualWidth : Column1.Width.Value) - 30; // the gridLayer1 width increases by 30 as the button panel disappears when both panels are hidden
                 }
             }
             else if (paneNumber == 2)
