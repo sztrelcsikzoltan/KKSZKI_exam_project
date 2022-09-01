@@ -175,6 +175,11 @@ namespace FrontendWPF.Windows
                 gridLayer0.ColumnDefinitions.Remove(_colOneCopyForLayer0);
                 // This won't always be present, but Remove silently ignores bad columns:
                 gridLayer1.ColumnDefinitions.Remove(_colTwoCopyForLayer1);
+
+                if (button_panel2.Visibility == Visibility.Collapsed)
+                {
+                    Column2.MaxWidth = gridLayer1.ActualWidth == 0 ? 760 : gridLayer1.ActualWidth - 10 - 30;
+                }
             }
             else if (panelNbr == 2)
             {
