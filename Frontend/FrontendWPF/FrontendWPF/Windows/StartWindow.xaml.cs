@@ -190,6 +190,11 @@ namespace FrontendWPF.Windows
                 // Remove the cloned columns from gridLayers 0 and 1:
                 gridLayer0.ColumnDefinitions.Remove(_colTwoCopyForLayer0);
                 gridLayer1.ColumnDefinitions.Remove(_colTwoCopyForLayer1);
+
+                if (button_panel1.Visibility == Visibility.Collapsed)
+                {
+                    Column1.MaxWidth = gridLayer1.ActualWidth == 0 ? 760 : gridLayer1.ActualWidth - 10 - 30;
+                }
             }
         }
 
