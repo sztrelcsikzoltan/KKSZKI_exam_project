@@ -618,7 +618,7 @@ namespace FrontendWPF.Windows
         {
             // do not allow to drag any of the columns to exceed the width of the gridLayer1 containing them 
 
-            // set MaxWidth of columns to gridLayer1.ActualWidth if any of them are not visible (any of the panels are visible)
+            // set MaxWidth of columns to gridLayer1.ActualWidth if at least of them is not visible (at least one of the panels is visible)
             if (button_panel1.Visibility != Visibility.Collapsed || button_panel2.Visibility != Visibility.Collapsed)
             {
                 Column1.MaxWidth = gridLayer1.ActualWidth - 10;
